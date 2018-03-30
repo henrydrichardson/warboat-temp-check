@@ -1,0 +1,24 @@
+Create database WarBoat;
+CREATE TABLE WarBoat.Player (
+	uniqueId int auto_increment, 
+    GamerTag VARCHAR(20), 
+    Email VARCHAR(50) unique, 
+    Wins mediumint, 
+    Loss mediumint, 
+    Currency int, 
+    PRIMARY KEY (uniqueId)
+    );
+CREATE TABLE Warboat.Item (
+	uniqueId int auto_increment,  
+    Name VARCHAR(50), 
+    TextureFile mediumblob,
+    PRIMARY KEY (uniqueId)
+    );
+CREATE TABLE WarBoat.Player_Items (
+	uniqueId int auto_increment, 
+    fk_player int, 
+    fk_items int,
+    FOREIGN KEY (fk_player) REFERENCES Player(uniqueId),
+    FOREIGN KEY (fk_items) REFERENCES Item(uniqueId),
+    PRIMARY KEY (uniqueId)
+    );
