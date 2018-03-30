@@ -1,4 +1,5 @@
 Create database WarBoat;
+
 CREATE TABLE WarBoat.Player (
 	uniqueId int auto_increment, 
     GamerTag VARCHAR(20), 
@@ -22,3 +23,6 @@ CREATE TABLE WarBoat.Player_Items (
     FOREIGN KEY (fk_items) REFERENCES Item(uniqueId),
     PRIMARY KEY (uniqueId)
     );
+    
+CREATE USER 'captainhenry'@'localhost' identified by 'cecilie';
+GRANT ALL PRIVILEGES ON WarBoat.* TO 'captainhenry'@'localhost';
