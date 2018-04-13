@@ -25,6 +25,7 @@
         android:id="@+id/imageView10"
         android:layout_width="162dp"
         android:layout_height="129dp"
+        android:background="@android:color/transparent"
         android:contentDescription="battleship"
         android:src="@drawable/battleship" />
 

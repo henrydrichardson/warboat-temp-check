@@ -13,8 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:adjustViewBounds="true"
-        android:background="#fff"
-        android:backgroundTint="#fff"
+        android:background="@android:color/transparent"
         android:clickable="true"
         android:scaleType="centerInside"
         android:src="@drawable/battleship"
@@ -82,6 +81,7 @@
         android:id="@+id/displayscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -99,5 +99,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currency"
         app:layout_constraintVertical_bias="0.081" />
+
+    <ImageButton
+        android:id="@+id/shop"
+        android:layout_width="79dp"
+        android:layout_height="78dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/shop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/startGameButton"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currency"
+        app:layout_constraintVertical_bias="0.888" />
 
 </android.support.constraint.ConstraintLayout>

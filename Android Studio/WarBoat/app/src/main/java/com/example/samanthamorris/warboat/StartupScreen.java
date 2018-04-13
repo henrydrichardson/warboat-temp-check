@@ -42,6 +42,16 @@ public class StartupScreen extends Activity {
             }
         });
 
+        ImageButton shop = (ImageButton) findViewById(R.id.shop);
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(StartupScreen.this,
+                        Shop.class);
+                startActivity(myIntent);
+            }
+        });
+
         /**
          * Alignment is funky
          * TODO: adjust constrains of TextViews in activity_startup_screen.xml
