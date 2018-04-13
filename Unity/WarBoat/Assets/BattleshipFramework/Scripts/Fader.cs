@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections;
 
 public class Fader : MonoBehaviour {
@@ -103,3 +104,4 @@ public class Fader : MonoBehaviour {
 		}
 	}
 }
+*/

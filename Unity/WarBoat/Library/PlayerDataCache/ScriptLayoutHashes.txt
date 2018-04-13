@@ -1,8 +1,7 @@
 OSXStandalone
 PlayerPath?
-/Users/samanthamorris/Desktop/WarBuild1.app
+/Users/samanthamorris/Desktop/WarBuild3.app
 SceneListBegin?
-Assets/BattleshipFramework/Scenes/Menu.unity
 Assets/BattleshipFramework/Scenes/Game.unity
 SceneListEnd?
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
@@ -153,12 +152,11 @@ c150a450d9bb10685c2d6d76a5bc48ed Assembly-CSharp.dll:.PlayerInput
 8a2855e94010374825cea347762b8e67 Assembly-CSharp.dll:.AnimatedAtlas
 d9fca053fa92e9a38c2f9b0ff226fcbd Assembly-CSharp.dll:.ShipController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FormationPresets
-17f757d6f42218d5cca4e271da47bcd6 Assembly-CSharp.dll:.GameController
+55ccadf7b61c686c82ef0b23b5452502 Assembly-CSharp.dll:.GameController
 aec1398497569abf6898a6c63b8850fe Assembly-CSharp.dll:.PauseManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BoardUIVer1
 cb15322bfffed93d6421014094fcc2e6 Assembly-CSharp.dll:.MenuController
 763fdc7900999d1ae69beee5599fae74 Assembly-CSharp.dll:.AIController
-92a7671ba4559de8f5ca81541ada8cc4 Assembly-CSharp.dll:.Fader
 89cba449a56179891ecfd48c2f163198 Assembly-CSharp.dll:.FlagActivation
 bd6c34db7903bdff55c6f50740e73338 Assembly-CSharp.dll:.TurnManager
 3c57d12cef5af056af549ed1a05e4d04 Assembly-CSharp.dll:.MapTileController

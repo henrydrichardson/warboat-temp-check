@@ -63,7 +63,8 @@ public class GameController : MonoBehaviour {
 	public GameObject playerInput;		//player input object (small sphere)
 	public GameObject btnStart;
 	public GameObject btnShuffle;
-	public GameObject fader;			//fader plane
+	// delete
+	//public GameObject fader;			//fader plane
 	public GameObject turnManager;		//trun manager plane
 	public GameObject playerScore;
 	public GameObject finishPlane;		
@@ -127,7 +128,8 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	void Start () {
 		//call fader
-		StartCoroutine(fader.GetComponent<Fader>().fadeToWhite());
+		// delete
+		//StartCoroutine(fader.GetComponent<Fader>().fadeToWhite());
 	}
 
 
@@ -284,7 +286,8 @@ public class GameController : MonoBehaviour {
 			yield break;
 
 		//call fader
-		StartCoroutine(fader.GetComponent<Fader>().fade ());
+		// delete
+		//StartCoroutine(fader.GetComponent<Fader>().fade ());
 
 		//refill missile stocks
 		refillMissiles();
