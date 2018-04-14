@@ -10,12 +10,13 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:columnWidth="10dp"
-        android:rowWidth="10dp"
         android:gravity="center"
         android:horizontalSpacing="0dp"
         android:numColumns="8"
-        android:numRows="8"
-        android:verticalSpacing="0dp" />
+        android:verticalSpacing="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button7"
