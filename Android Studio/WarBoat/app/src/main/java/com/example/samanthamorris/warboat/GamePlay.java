@@ -16,7 +16,7 @@ public class GamePlay extends AppCompatActivity {
 
     public GamePlay(Player One, Player Two)
     {
-        //Populate Boats
+        // TODO: Populate Boats
 
 
         GridLayout mainGrid = findViewById(R.id.mainGrid);
