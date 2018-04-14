@@ -22,7 +22,7 @@ public class StartupScreen extends Activity {
          */
 
 
-        ImageButton settings = findViewById(R.id.settingsButton);
+        ImageButton settings = (ImageButton) findViewById(R.id.settingsButton);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +32,7 @@ public class StartupScreen extends Activity {
             }
         });
 
-        ImageButton shop = findViewById(R.id.shop);
+        ImageButton shop = (ImageButton) findViewById(R.id.shop);
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,25 +42,25 @@ public class StartupScreen extends Activity {
             }
         });
 
-        Button singleGame = findViewById(R.id.singlePlayerButton);
-        shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(StartupScreen.this,
-                        GamePlay.class);
-                startActivity(myIntent);
-            }
-        });
+//        Button singleGame = (Button) findViewById(R.id.singlePlayerButton);
+//        shop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent = new Intent(StartupScreen.this,
+//                        GamePlay.class);
+//                startActivity(myIntent);
+//            }
+//        });
 
-        Button multiGame = findViewById(R.id.multiPlayerButton);
-        shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(StartupScreen.this,
-                        GamePlay.class);
-                startActivity(myIntent);
-            }
-        });
+//        Button multiGame = (Button) findViewById(R.id.multiPlayerButton);
+//        shop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent = new Intent(StartupScreen.this,
+//                        GamePlay.class);
+//                startActivity(myIntent);
+//            }
+//        });
 
         /**
          * Alignment is funky
