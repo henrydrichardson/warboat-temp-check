@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,52 +32,90 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/coins" />
 
-    <ImageView
-        android:id="@+id/skinPNG_1"
-        android:layout_width="125dp"
-        android:layout_height="151dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buySkin_1"
-        app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088"
-        app:srcCompat="@drawable/kuzco" />
-
-    <TextView
-        android:id="@+id/skinName_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/aldrich"
-        android:text="Kuzco Skin"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/skinPNG_1"
-        tools:layout_editor_absoluteY="80dp" />
-
-    <Button
-        android:id="@+id/buySkin_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="buy for 15 coins"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/skinPNG_1"
-        app:layout_constraintTop_toBottomOf="@+id/skinName_1"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="368dp"
+        android:layout_height="462dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/skinName_1"
+                android:layout_width="148dp"
+                android:layout_height="30dp"
+                android:fontFamily="@font/aldrich"
+                android:text="Kuzco Skin"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+            <ImageView
+                android:id="@+id/skinPNG_1"
+                android:layout_width="172dp"
+                android:layout_height="157dp"
+                app:srcCompat="@drawable/kuzco"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/buySkin_1"
+                android:layout_width="177dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:text="buy for 15 coins" />
+
+
+            <TextView
+                android:id="@+id/skinName_2"
+                android:layout_width="148dp"
+                android:layout_height="30dp"
+                android:fontFamily="@font/aldrich"
+                android:text="Kuzco Skin"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+            <ImageView
+                android:id="@+id/skinPNG_2"
+                android:layout_width="172dp"
+                android:layout_height="157dp"
+                app:srcCompat="@drawable/kuzco"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/buySkin_2"
+                android:layout_width="177dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:text="buy for 15 coins" />
+
+            <TextView
+                android:id="@+id/skinName_3"
+                android:layout_width="148dp"
+                android:layout_height="30dp"
+                android:fontFamily="@font/aldrich"
+                android:text="Kuzco Skin"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+            <ImageView
+                android:id="@+id/skinPNG_3"
+                android:layout_width="172dp"
+                android:layout_height="157dp"
+                app:srcCompat="@drawable/kuzco"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/buySkin_3"
+                android:layout_width="177dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:text="buy for 15 coins" />
+        </LinearLayout>
     </ScrollView>
-
-
 </android.support.constraint.ConstraintLayout>
