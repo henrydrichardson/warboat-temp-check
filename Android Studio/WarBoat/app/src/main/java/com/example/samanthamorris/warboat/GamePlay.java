@@ -31,17 +31,19 @@ public class GamePlay extends AppCompatActivity {
             });
         }
 
-
+        // Turn Manager
         int turn = 0;
-        boolean gameisOver = true;
+        boolean gameIsOver = true;
 
-        while (!gameisOver)
+        while (!gameIsOver)
         {
+            // Display other player's grid
             GridManager[(turn+1)%2].display();
             GridManager[turn%2].player.attack();
 
+            // If attack causes a game loss for the other player, the game is over
             if (GridManager[(turn+1)%2].isLost())
-                gameisOver = false;
+                gameIsOver = false;
             turn++;
         }
 
