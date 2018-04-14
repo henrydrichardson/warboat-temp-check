@@ -21,17 +21,24 @@ public class Grid extends AppCompatActivity {
     {
 
     }
-//
+
 //    public boolean isVisible(Player Current)
 //    {
 //
 //    }
-//
-    public void setAttackPoints()
+
+    public void setAttackPoints(int buttonIndex)
     {
         //Attack is recorded by listner
         //ATTACK_POINTS.add(buttonIndex)
 
+    }
+
+    // Returning all the Attack blocks on the grid
+    public ArrayList<Integer> getAttackPoints()
+    {
+
+        return ATTACK_POINTS;
     }
 
     //Finding all the hit blocks on the grid
