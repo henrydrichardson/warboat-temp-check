@@ -13,5 +13,14 @@ public class GamePlay {
 
     }
 
+    public void updatePlayerGrid()
+    {
+
+    }
+    public void updateAttackGrid()
+    {
+
+    }
+
 
 }

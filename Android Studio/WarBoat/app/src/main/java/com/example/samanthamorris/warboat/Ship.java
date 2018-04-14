@@ -7,30 +7,30 @@ public class Ship {
     public Ship()
     {
     }
-    public boolean isSunk()
-    {
-
-    }
-
-    public int[][] getPostion()
-    {
-
-    }
-
-    public int getHeading()
-    {
-
-    }
-    public int numHit()
-    {
-
-    }
-    public void setPosition()
-    {
-
-    }
-    public void rotate()
-    {
-
-    }
+//    public boolean isSunk()
+//    {
+//
+//    }
+//
+//    public int[][] getPostion()
+//    {
+//
+//    }
+//
+//    public int getHeading()
+//    {
+//
+//    }
+//    public int numHit()
+//    {
+//
+//    }
+//    public void setPosition()
+//    {
+//
+//    }
+//    public void rotate()
+//    {
+//
+//    }
 }
