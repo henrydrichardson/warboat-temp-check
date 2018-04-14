@@ -5,10 +5,7 @@ package com.example.samanthamorris.warboat;
         import android.app.Activity;
         import android.util.Log;
         import android.view.View;
-        import android.widget.Button;
         import android.widget.ImageButton;
-        import android.widget.Spinner;
-        import android.widget.ArrayAdapter;
         import android.widget.TextView;
 
 public class StartupScreen extends Activity {
@@ -43,6 +40,25 @@ public class StartupScreen extends Activity {
         });
 
         ImageButton shop = (ImageButton) findViewById(R.id.shop);
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(StartupScreen.this,
+                        Shop.class);
+                startActivity(myIntent);
+            }
+        });
+
+        ImageButton singleGame = (ImageButton) findViewById(R.id.startSingleButton);
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(StartupScreen.this,
+                        Shop.class);
+                startActivity(myIntent);
+            }
+        });
+        ImageButton multiGame = (ImageButton) findViewById(R.id.startMultiButton);
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
