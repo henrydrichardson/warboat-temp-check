@@ -91,6 +91,7 @@
 
     <!-- Skin options -->
     <string name="skin_prompt">Choose a skin</string>
+    <string name="single_play">Single Play</string>
     <string-array name="skin_options">
         <item>Basic</item>
         <item>Pub Sub</item>

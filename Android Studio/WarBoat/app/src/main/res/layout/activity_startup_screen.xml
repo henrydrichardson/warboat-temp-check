@@ -26,19 +26,36 @@
 
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/startGameButton"
+        android:id="@+id/startSingleButton"
         android:layout_width="136dp"
         android:layout_height="144dp"
         android:layout_marginStart="8dp"
         android:clickable="true"
+        android:text="Single Play"
         app:backgroundTint="#2cb5ff"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintVertical_bias="0.538" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/startMultiButton"
+        android:layout_width="136dp"
+        android:layout_height="144dp"
+        android:layout_marginStart="8dp"
+        android:clickable="true"
+        android:text="Single Play"
+        app:backgroundTint="#2cb5ff"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/settingsButton"
@@ -94,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/startGameButton"
+        app:layout_constraintBottom_toTopOf="@+id/startSingleButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currency"
@@ -108,10 +125,45 @@
         android:scaleType="centerInside"
         android:src="@drawable/shop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/startGameButton"
+        app:layout_constraintEnd_toStartOf="@+id/startSingleButton"
         app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currency"
         app:layout_constraintVertical_bias="0.888" />
+
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Single Play"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="243dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.550"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.540" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Multiplayer"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="243dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.550"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.870" />
+
 
 </android.support.constraint.ConstraintLayout>
