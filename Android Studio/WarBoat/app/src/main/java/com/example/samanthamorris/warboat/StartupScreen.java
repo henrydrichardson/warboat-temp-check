@@ -5,6 +5,7 @@ package com.example.samanthamorris.warboat;
         import android.app.Activity;
         import android.util.Log;
         import android.view.View;
+        import android.widget.Button;
         import android.widget.ImageButton;
         import android.widget.TextView;
 
@@ -19,17 +20,9 @@ public class StartupScreen extends Activity {
         /**
          * Go back to login activity upon hitting home icon.
          */
-        ImageButton back = (ImageButton) findViewById(R.id.home);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(StartupScreen.this,
-                        LoginActivity.class);
-                startActivity(myIntent);
-            }
-        });
 
-        ImageButton settings = (ImageButton) findViewById(R.id.settingsButton);
+
+        ImageButton settings = findViewById(R.id.settingsButton);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +32,7 @@ public class StartupScreen extends Activity {
             }
         });
 
-        ImageButton shop = (ImageButton) findViewById(R.id.shop);
+        ImageButton shop = findViewById(R.id.shop);
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +42,7 @@ public class StartupScreen extends Activity {
             }
         });
 
-        ImageButton singleGame = (ImageButton) findViewById(R.id.startSingleButton);
+        Button singleGame = findViewById(R.id.singlePlayerButton);
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +51,8 @@ public class StartupScreen extends Activity {
                 startActivity(myIntent);
             }
         });
-        ImageButton multiGame = (ImageButton) findViewById(R.id.startMultiButton);
+
+        Button multiGame = findViewById(R.id.multiPlayerButton);
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

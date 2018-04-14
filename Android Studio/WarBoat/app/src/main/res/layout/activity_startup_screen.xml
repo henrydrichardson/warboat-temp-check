@@ -6,164 +6,120 @@
     android:layout_height="match_parent"
     tools:context=".StartupScreen">
 
-    <ImageButton
-        android:id="@+id/home"
-        android:layout_width="85dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/battleship"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/startSingleButton"
-        android:layout_width="136dp"
-        android:layout_height="144dp"
-        android:layout_marginStart="8dp"
-        android:clickable="true"
-        android:text="Single Play"
-        app:backgroundTint="#2cb5ff"
-        app:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.538" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/startMultiButton"
-        android:layout_width="136dp"
-        android:layout_height="144dp"
-        android:layout_marginStart="8dp"
-        android:clickable="true"
-        android:text="Single Play"
-        app:backgroundTint="#2cb5ff"
-        app:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/settingsButton"
         android:layout_width="85dp"
         android:layout_height="70dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="72dp"
         android:clickable="true"
         android:src="@drawable/settings"
-        app:backgroundTint="#2cb5ff"
-        app:elevation="0dp"
+        app:backgroundTint="@android:color/holo_blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
-
-    <ImageView
-        android:id="@+id/highscore"
-        android:layout_width="221dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="84dp"
-        android:src="@drawable/highscore"
-        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
-        app:layout_constraintHorizontal_bias="0.653"
-        app:layout_constraintStart_toEndOf="@+id/home"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/currency"
-        android:layout_width="221dp"
-        android:layout_height="31dp"
-        android:src="@drawable/currency"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/displayscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:textAlignment="center"
+        app:layout_constraintRight_toLeftOf="@id/displaycurrency"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintTop_toBottomOf="@+id/highScoreTitle" />
 
     <TextView
         android:id="@+id/displaycurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:layout_marginTop="22dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/startSingleButton"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currency"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintTop_toBottomOf="@+id/currencyTitle" />
 
     <ImageButton
         android:id="@+id/shop"
-        android:layout_width="79dp"
-        android:layout_height="78dp"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/shop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/startSingleButton"
-        app:layout_constraintHorizontal_bias="0.59"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currency"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="109dp"
+    <Button
+        android:id="@+id/singlePlayerButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Single Play"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="243dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="272dp"
+        android:text="Single Player"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.550"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.540" />
+        />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="109dp"
+        android:id="@+id/highScoreTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Multiplayer"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="243dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/aldrich"
+        android:text="High Score"
+        android:textSize="24sp"
+        app:layout_constraintRight_toLeftOf="@+id/currencyTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/currencyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Currency"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/multiPlayerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="132dp"
+        android:layout_marginTop="8dp"
+        android:text="Multi Player"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.550"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.870" />
+        app:layout_constraintTop_toBottomOf="@+id/singlePlayerButton" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="118dp"
+        android:layout_height="132dp"
+        android:layout_marginBottom="124dp"
+        android:src="@drawable/battleship"
+        app:layout_constraintBottom_toTopOf="@+id/singlePlayerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
