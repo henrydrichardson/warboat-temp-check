@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.GridLayout
+        android:id="@+id/mainGrid"
         android:layout_width="wrap_content"
         android:layout_height="495dp"
         tools:layout_editor_absoluteX="32dp"
