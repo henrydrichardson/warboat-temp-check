@@ -54,7 +54,7 @@ public class StartupScreen extends Activity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(StartupScreen.this,
-                        Shop.class);
+                        GamePlay.class);
                 startActivity(myIntent);
             }
         });
@@ -63,7 +63,7 @@ public class StartupScreen extends Activity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(StartupScreen.this,
-                        Shop.class);
+                        GamePlay.class);
                 startActivity(myIntent);
             }
         });
