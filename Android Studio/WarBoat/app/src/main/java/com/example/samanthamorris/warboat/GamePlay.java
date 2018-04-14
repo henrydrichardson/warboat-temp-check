@@ -10,13 +10,7 @@ import android.util.Log;
 
 public class GamePlay extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_grid);
 
-
-    }
     public GamePlay(Player One, Player Two)
     {
         //Populate Boats
