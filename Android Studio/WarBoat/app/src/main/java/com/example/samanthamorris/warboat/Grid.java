@@ -13,10 +13,8 @@ public class Grid extends AppCompatActivity {
 
 
     }
-
-    private static final ArrayList<Integer> SHIP_POINTS = new ArrayList<Integer>();
-    private static final ArrayList<Integer> ATTACK_POINTS = new ArrayList<Integer>();
-    private static final ArrayList<Integer> HIT_POINTS = new ArrayList<Integer>();
+    private ArrayList<Integer> SHIP_POINTS = new ArrayList<Integer>();
+    private ArrayList<Integer> ATTACK_POINTS = new ArrayList<Integer>();
 
 
 //    public Grid(Player Current)
@@ -39,12 +37,13 @@ public class Grid extends AppCompatActivity {
 //
 //    }
 //
-//    public ArrayList<Integer> getHitPoints(int[][] Hits)
+//    public ArrayList<Integer> getHitPoints()
 //    {
-//
+//        ArrayList<Integer> Hits = new ArrayList<Integer>();
+//        for ()
 //    }
 //
-//    public ArrayList<Integer> getMissPoints(int[][] Hits)
+//    public ArrayList<Integer> getMissPoints()
 //    {
 //
 //    }
