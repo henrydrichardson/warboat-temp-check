@@ -26,7 +26,7 @@ public class GamePlay extends AppCompatActivity {
             GridManager[(turn+1)%2].display();
             GridManager[turn%2].player.attack();
 
-            if (GridManager[(turn+1)%2].isLost)
+            if (GridManager[(turn+1)%2].isLost())
                 gameisOver = false;
             turn++;
         }
