@@ -1,9 +1,6 @@
 package com.example.samanthamorris.warboat;
 
-public class Player {
+public abstract class Player {
 
-    public void Attack()
-    {
-
-    }
+    public abstract int Attack();
 }
