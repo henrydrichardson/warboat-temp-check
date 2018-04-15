@@ -97,4 +97,22 @@
         <item>Pub Sub</item>
     </string-array>
 
+
+    <!-- Purchase confirmation string -->
+    <string name="confirmPurchase">Purchase successful!</string>
+
+
+    <!-- Purchase denial string -->
+    <string name="denyPurchase">Purchase denied</string>
+
+    <!-- Purchase question -->
+    <string name="purchaseQuestion">Are you sure you want to buy this skin?</string>
+
+    <!-- Choose yes -->
+    <string name="yes">Yes</string>
+
+    <!-- Choose no -->
+    <string name="no">No</string>
+
+
 </resources>

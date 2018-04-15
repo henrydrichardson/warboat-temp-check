@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/myCoordinatorLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -49,20 +56,22 @@
 
             <TextView
                 android:id="@+id/skinName_1"
-                android:layout_width="148dp"
+                android:layout_width="177dp"
                 android:layout_height="30dp"
-                android:fontFamily="@font/aldrich"
-                android:text="Kuzco Skin"
-                android:textAlignment="center"
-                android:textSize="24sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/aldrich"
+                android:text="PubSub Skin"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
             <ImageView
                 android:id="@+id/skinPNG_1"
                 android:layout_width="172dp"
                 android:layout_height="157dp"
-                app:srcCompat="@drawable/kuzco"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/pubsub" />
+
             <Button
                 android:id="@+id/buySkin_1"
                 android:layout_width="177dp"
@@ -116,6 +125,11 @@
                 android:layout_height="52dp"
                 android:layout_gravity="center"
                 android:text="buy for 15 coins" />
+
+
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
