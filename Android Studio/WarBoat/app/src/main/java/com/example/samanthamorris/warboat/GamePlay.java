@@ -19,6 +19,12 @@ public class GamePlay extends AppCompatActivity {
 
     }
 
+    public GamePlay() {
+
+    }
+
+    /*
+
     public Grid[] GridManager = new Grid[2];
 
     public GamePlay(Player One, Player Two)
@@ -67,6 +73,7 @@ public class GamePlay extends AppCompatActivity {
     {
 
     }
+    */
 
 
 }
