@@ -7,6 +7,7 @@ public class Human extends Player {
     public Grid PlayerGrid;
 
     protected Human(){
+
         PlayerGrid = new Grid(this);
     }
 
@@ -53,7 +54,9 @@ public class Human extends Player {
 
     public int getScore()
     {
-        return 0;
+
+        return getWins()/getLosses();
+        //return 0;
     }
 
     public int updateScore()

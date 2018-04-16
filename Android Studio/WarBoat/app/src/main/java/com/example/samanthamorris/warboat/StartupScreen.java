@@ -53,31 +53,16 @@ public class StartupScreen extends Activity {
             }
         });
 
+//        Button multiGame = (Button) findViewById(R.id.multiPlayerButton);
+//        multiGame.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent = new Intent(StartupScreen.this,
+//                        GamePlay.class);
+//                startActivity(myIntent);
+//            }
+//        });
 
-        /*
-        Button singleGame = (Button) findViewById(R.id.singlePlayerButton);
-        shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(StartupScreen.this,
-                        GamePlay.class);
-                startActivity(myIntent);
-            }
-        });
-
-
-
-        Button multiGame = (Button) findViewById(R.id.multiPlayerButton);
-        shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(StartupScreen.this,
-                        GamePlay.class);
-                startActivity(myIntent);
-            }
-        });
-
-        */
         /**
          * Alignment is funky
          * TODO: adjust constrains of TextViews in activity_startup_screen.xml
