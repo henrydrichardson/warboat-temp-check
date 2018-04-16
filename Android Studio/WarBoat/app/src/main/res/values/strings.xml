@@ -105,6 +105,9 @@
     <!-- Purchase denial string -->
     <string name="denyPurchase">Purchase denied</string>
 
+    <!-- Purchase cancelled string -->
+    <string name="cancelPurchase">Purchase cancelled</string>
+
     <!-- Purchase question -->
     <string name="purchaseQuestion">Are you sure you want to buy this skin?</string>
 

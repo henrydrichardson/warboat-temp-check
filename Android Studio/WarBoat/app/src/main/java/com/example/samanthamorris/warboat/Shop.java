@@ -17,9 +17,27 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 
 
-public class Shop extends AppCompatActivity {
+public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.onCompleteListener {
     // TODO: Replace cur with actual currency value from database
     int cur = 888;
+
+    // User has selected yes or no to purchase
+    public void onComplete(String dec) {
+        Log.d("SELECTED",dec);
+        // If user responds yes...
+        if (dec.equals("yes")) {
+            // Decrease currency and confirm purchase.
+            cur -= 15;
+            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.confirmPurchase, Snackbar.LENGTH_SHORT).show();
+            // TODO: add skin option to list in settings activity
+        }
+
+        // User decided against purchase
+        else {
+            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.cancelPurchase, Snackbar.LENGTH_LONG).show();
+        }
+
+    }
 
 
     @Override
@@ -45,41 +63,13 @@ public class Shop extends AppCompatActivity {
                     probe.show(getFragmentManager(), "purchase");
 
 
-                    // Get user response
-                    Bundle bundle = getIntent().getExtras();
 
-
-                    // FIX THIS
-                    /*
-                    String decision = (String)bundle.get("response");
-
-                    Log.d("choice", decision);
-
-
-
-                    // If user responds yes...
-                    if(decision.equals("yes"))  {
-                        // Decrease currency and confirm purchase.
-                        cur-=15;
-                        Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.confirmPurchase, Snackbar.LENGTH_SHORT).show();
-                        // TODO: add skin option to list in settings activity
-                    }
-
-                    // User decided against purchase
-                    else {
-
-                    }
-
-                    */
                 }
+
                 else {
                     // User cannot purchase - does not have enough currency
                     Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.denyPurchase, Snackbar.LENGTH_SHORT).show();
                 }
-
-                //Intent myIntent = new Intent(Shop.this,
-                //        StartupScreen.class);
-                //startActivity(myIntent);
             }
         });
 
