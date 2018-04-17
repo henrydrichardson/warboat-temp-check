@@ -3,9 +3,11 @@ package com.example.samanthamorris.warboat;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebHistoryItem;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -13,9 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.Button;
+import android.os.SystemClock;
 
 import java.util.HashMap;
-
+import java.util.Random;
+import java.lang.Math;
 
 public class GamePlay extends AppCompatActivity {
 
@@ -24,22 +28,23 @@ public class GamePlay extends AppCompatActivity {
     public boolean isRotated = false;
     public Grid[] GridManager;
     public HashMap<Integer, Integer> displayMap;
-    int currentGrid = 0;
     int shipTracker;
+    int turn;
 
-    private void redrawGrid() {
+    private void redrawGrid(boolean displayShips, int whichGrid) {
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
         int childCount = mainGrid.getChildCount();
 
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
-            if (GridManager[currentGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[currentGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
+            if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
                 button.setBackgroundColor(Color.RED);
-            } else if (GridManager[currentGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
+            } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
                 button.setBackgroundColor(Color.GRAY);
-            } else if (GridManager[currentGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))) {
+            } else if (GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId())) && displayShips) {
                 button.setBackgroundColor(Color.BLACK);
             } else {
+                button.setBackgroundColor(Color.TRANSPARENT);
             }
         }
 
@@ -69,32 +74,92 @@ public class GamePlay extends AppCompatActivity {
                                         });
 
 
+        // Generate AI Grid
+        final Random random = new Random();
+        while(true) {
+            if (GridManager[1].populateShips(shipTracker, random.nextBoolean(), Math.abs(random.nextInt()%64))) {
+                shipTracker++;
+                if (shipTracker == 5) {
+                    break;
+                }
+            }
 
+        }
+
+        shipTracker = 0;
+        turn = 0;
+        redrawGrid(true, 0);
+        final Handler handler = new Handler();
         //Creates a listener on all Grid button
         for(int i = 0; i < childCount; i++) {
             final Button button = (Button) mainGrid.getChildAt(i);
             displayMap.put(button.getId(),i);
+
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ColorDrawable drawableButton = (ColorDrawable) button.getBackground();
+                    if (turn%2 == 0) {
+                        //Populate
+                        if (!isShipsPlaced) {
+                            if (GridManager[0].populateShips(shipTracker, isRotated, displayMap.get(button.getId()))) {
+                                shipTracker++;
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        redrawGrid( true, 0);
+                                    }
+                                }, 0);
+                                if (shipTracker == 5) {
+                                    isShipsPlaced = true;
+                                  //  SystemClock.sleep(7000);
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            redrawGrid(false,1);
+                                        }
+                                    }, 1000);
 
-                    //Populate
-                    if (!isShipsPlaced) {
-                        if (GridManager[0].populateShips(shipTracker, isRotated, displayMap.get(button.getId()))){
-                            shipTracker++;
-                            if (shipTracker == 5) {
-                                isShipsPlaced = true;
+                                }
+                            }
+                        } else {
+                            if (GridManager[1].setAttackPoint(displayMap.get(button.getId()))) {
+                                turn++;
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        redrawGrid(true,0);
+                                    }
+                                }, 0);
+                             //   SystemClock.sleep(7000);
+                                int aiAttackLocation = Math.abs(random.nextInt()%64);
+                                boolean previousHit = false;
+                                while (!GridManager[0].setAttackPoint(aiAttackLocation)) {
+                                        aiAttackLocation = Math.abs(random.nextInt()%64);
+                                    }
+                                if (GridManager[0].getSHIP_POINTS().contains(aiAttackLocation))
+                                    previousHit = true;
+                           //     SystemClock.sleep(7000);
+
+                                turn++;
+
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        redrawGrid(false,1);
+                                    }
+                                }, 10000);
                             }
                         }
-                    }
-                    else {
-                        if(GridManager[0].setAttackPoint(displayMap.get(button.getId()))){
-                            // Change Turn
-                        }
+
+
+
+                    } else {
+                        // No no area
                     }
 
-                    redrawGrid();
+                   // redrawGrid(true, 0);
                 }
             });
         }
