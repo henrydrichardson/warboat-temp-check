@@ -28,11 +28,22 @@ public class Grid extends AppCompatActivity {
 
     public int[][] Ships = {AircraftCarrier, WarBoat, Destroyer, Submarine, PatrolBoat};
 
-    public void populateShips(int ship, boolean isRotated, int anchor)
+    // Adds ships wit their correct points
+    public boolean populateShips(int ship, boolean isRotated, int anchor)
     {
         int count = 0;
 
+        // Horizontal
         if (!isRotated){
+
+            // Conflict Manager
+            for (int i = 0; i < Ships[ship].length; i++)
+            {
+                if (SHIP_POINTS.contains(anchor+i))
+                {
+                    return false;
+                }
+            }
 
             for (int i = 0; i < Ships[ship].length; i++)
             {
@@ -44,8 +55,18 @@ public class Grid extends AppCompatActivity {
             }
         }
 
+        // Vertical
         if (isRotated)
         {
+            // Conflict Manager
+            for (int i = 0; i < Ships[ship].length; i++)
+            {
+                if (SHIP_POINTS.contains(anchor+(i*8)))
+                {
+                    return false;
+                }
+            }
+
             for (int i = 0; i < Ships[ship].length; i++)
             {
                 //Player Grid Ship Location and add head + (i*8)
@@ -56,6 +77,9 @@ public class Grid extends AppCompatActivity {
             }
         }
 
+        // Successful ship placement
+        return true;
+
     }
 
 
@@ -65,16 +89,19 @@ public class Grid extends AppCompatActivity {
 
     }
 
+    // Returns SHIP_POINTS ArrayList
     public ArrayList<Integer> getSHIP_POINTS() {
         return SHIP_POINTS;
     }
 
+    // Checks if ships are visible
     public boolean isVisible(Player Current)
     {
         // TODO
         return true;
     }
 
+    // Keeps track of Attack Points
     public void setAttackPoints(int buttonIndex)
     {
         //Attack is recorded by listner
