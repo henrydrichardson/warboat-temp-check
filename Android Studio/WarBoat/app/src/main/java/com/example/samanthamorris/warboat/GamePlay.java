@@ -1,6 +1,8 @@
 package com.example.samanthamorris.warboat;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,17 +12,70 @@ import android.widget.Spinner;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.Button;
+
+import java.util.HashMap;
+
 
 public class GamePlay extends AppCompatActivity {
 
+
+    public boolean isShipsPlaced = false;
+    public boolean isRotated = false;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_grid);
+        setContentView(R.layout.game_grid_buttons);
+
+
+
+        android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
+        int childCount = mainGrid.getChildCount();
+
+
+        // Listener to calculte if the ship will be rotated.
+        final Button rotateButton = (Button) findViewById(R.id.RotateButton);
+        rotateButton.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                isRotated = !isRotated;
+                                            }
+                                        });
+
+
+
+        // Used to map display objects to Grid Class locations
+        HashMap<Integer, Integer> displayMap = new HashMap<Integer, Integer>(86);
+
+
+        //Creates a listener on all Grid button
+        for(int i = 0; i < childCount; i++) {
+            final Button button = (Button) mainGrid.getChildAt(i);
+            displayMap.put(button.getId(),i);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ColorDrawable drawableButton = (ColorDrawable) button.getBackground();
+
+                    //Populate
+                    if (!isShipsPlaced) {
+
+                    }
+
+                    if (drawableButton.getColor() == Color.RED)
+                        button.setBackgroundColor(Color.BLACK);
+                    else
+                        button.setBackgroundColor(Color.RED);
+                }
+            });
+        }
 
 
     }
 
     public GamePlay() {
+
+
 
     }
 
