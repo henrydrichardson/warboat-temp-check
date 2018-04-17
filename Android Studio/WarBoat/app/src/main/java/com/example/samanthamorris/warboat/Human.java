@@ -8,7 +8,7 @@ public class Human extends Player {
 
     protected Human(){
 
-        PlayerGrid = new Grid(this);
+        PlayerGrid = new Grid();
     }
 
     public int Attack()

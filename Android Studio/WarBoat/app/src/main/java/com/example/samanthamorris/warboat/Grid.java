@@ -21,7 +21,7 @@ public class Grid extends AppCompatActivity {
     private ArrayList<Integer> ATTACK_POINTS = new ArrayList<Integer>();
 
     public int[] AircraftCarrier = new int[5];
-    public int[] WarBoat = new int[5];
+    public int[] WarBoat = new int[4];
     public int[] Destroyer = new int[3];
     public int[] Submarine = new int[3];
     public int[] PatrolBoat = new int[2];
@@ -36,6 +36,10 @@ public class Grid extends AppCompatActivity {
         // Horizontal
         if (!isRotated){
 
+            if ((anchor%8)+ Ships[ship].length >= 8)
+            {
+                return false;
+            }
             // Conflict Manager
             for (int i = 0; i < Ships[ship].length; i++)
             {
@@ -58,6 +62,10 @@ public class Grid extends AppCompatActivity {
         // Vertical
         if (isRotated)
         {
+            if (anchor + (Ships[ship].length - 1)*8 >= 64)
+            {
+                return false;
+            }
             // Conflict Manager
             for (int i = 0; i < Ships[ship].length; i++)
             {
@@ -83,7 +91,7 @@ public class Grid extends AppCompatActivity {
     }
 
 
-    public Grid(Player Current)
+    public Grid()
     {
 
 

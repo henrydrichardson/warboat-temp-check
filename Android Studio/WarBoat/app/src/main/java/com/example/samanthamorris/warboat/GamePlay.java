@@ -22,11 +22,37 @@ public class GamePlay extends AppCompatActivity {
 
     public boolean isShipsPlaced = false;
     public boolean isRotated = false;
+    public Grid[] GridManager;
+    public HashMap<Integer, Integer> displayMap;
+    int currentGrid = 0;
+    int shipTracker;
+
+    private void redrawGrid() {
+        android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
+        int childCount = mainGrid.getChildCount();
+
+        for( int j = 0; j < childCount; j++) {
+            final Button button = (Button) mainGrid.getChildAt(j);
+            if (GridManager[currentGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[currentGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
+                button.setBackgroundColor(Color.RED);
+            } else if (GridManager[currentGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
+                button.setBackgroundColor(Color.GRAY);
+            } else if (GridManager[currentGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))) {
+                button.setBackgroundColor(Color.BLACK);
+            } else {
+            }
+        }
+
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_grid_buttons);
-
+        GridManager = new Grid[2];
+        displayMap = new HashMap<>(86);
+        this.shipTracker = 0;
+        GridManager[0] = new Grid();
+        GridManager[1] = new Grid();
 
 
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
@@ -44,10 +70,6 @@ public class GamePlay extends AppCompatActivity {
 
 
 
-        // Used to map display objects to Grid Class locations
-        HashMap<Integer, Integer> displayMap = new HashMap<Integer, Integer>(86);
-
-
         //Creates a listener on all Grid button
         for(int i = 0; i < childCount; i++) {
             final Button button = (Button) mainGrid.getChildAt(i);
@@ -59,13 +81,15 @@ public class GamePlay extends AppCompatActivity {
 
                     //Populate
                     if (!isShipsPlaced) {
-
+                        if (GridManager[0].populateShips(shipTracker, isRotated, displayMap.get(button.getId()))){
+                            shipTracker++;
+                            if (shipTracker == 5) {
+                                isShipsPlaced = true;
+                            }
+                        }
                     }
 
-                    if (drawableButton.getColor() == Color.RED)
-                        button.setBackgroundColor(Color.BLACK);
-                    else
-                        button.setBackgroundColor(Color.RED);
+                    redrawGrid();
                 }
             });
         }
