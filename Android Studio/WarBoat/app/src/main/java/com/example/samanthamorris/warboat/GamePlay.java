@@ -88,6 +88,11 @@ public class GamePlay extends AppCompatActivity {
                             }
                         }
                     }
+                    else {
+                        if(GridManager[0].setAttackPoint(displayMap.get(button.getId()))){
+                            // Change Turn
+                        }
+                    }
 
                     redrawGrid();
                 }

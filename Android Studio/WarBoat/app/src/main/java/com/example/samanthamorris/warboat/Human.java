@@ -26,7 +26,7 @@ public class Human extends Player {
             }
 
             // If move is valid, store index
-            PlayerGrid.setAttackPoints(/*Button Chosen*/0);
+            PlayerGrid.setAttackPoint(/*Button Chosen*/0);
         }
 
         return 0;
