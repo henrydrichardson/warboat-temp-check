@@ -4,6 +4,6 @@ public class PatrolBoat extends Ship {
 
     public PatrolBoat()
     {
-        length = 2;
+        this.length = 2;
     }
 }

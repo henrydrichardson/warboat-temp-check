@@ -4,6 +4,6 @@ public class WarBoat extends Ship {
 
     public WarBoat()
     {
-        length = 4;
+        this.length = 4;
     }
 }
