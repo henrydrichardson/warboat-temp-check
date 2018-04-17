@@ -110,10 +110,19 @@ public class Grid extends AppCompatActivity {
     }
 
     // Keeps track of Attack Points
-    public void setAttackPoints(int buttonIndex)
+    public boolean setAttackPoint(int index)
     {
-        //Attack is recorded by listner
-        //ATTACK_POINTS.add(buttonIndex)
+        // Checks if attack point has already been chosen
+        if (ATTACK_POINTS.contains(index))
+        {
+            return false;
+        }
+
+        // If valid attack point
+        else{
+            ATTACK_POINTS.add(index);
+            return true;
+        }
 
     }
 
