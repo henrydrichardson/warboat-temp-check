@@ -187,5 +187,19 @@ public class Grid extends AppCompatActivity {
         return true;
     }
 
+    // Checks if a ship has been sunk
+    public boolean isSunk(int ShipCoordinates)
+    {
+        for (int i = 0; i < Ships[ShipCoordinates].length; i++)
+        {
+            if (!ATTACK_POINTS.contains(Ships[ShipCoordinates][i]))
+            {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 
 }
