@@ -35,6 +35,7 @@ public class GamePlay extends AppCompatActivity {
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
         int childCount = mainGrid.getChildCount();
 
+
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
             if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
@@ -141,6 +142,13 @@ public class GamePlay extends AppCompatActivity {
                                 if (GridManager[0].getSHIP_POINTS().contains(aiAttackLocation))
                                     previousHit = true;
                            //     SystemClock.sleep(7000);
+
+                                if (GridManager[(turn+1)%2].isGameLost())
+                                {
+                                    Intent myIntent = new Intent(GamePlay.this,
+                                            LostGame.class);
+                                    startActivity(myIntent);
+                                }
 
                                 turn++;
 

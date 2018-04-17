@@ -21,11 +21,11 @@
             android:id="@+id/b1"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            app:layout_column="0"
-            app:layout_row="0"
             android:background="@android:color/transparent"
             android:clickable="true"
-            />
+            android:elevation="0dp"
+            app:layout_column="0"
+            app:layout_row="0" />
 
         <Button
             android:id="@+id/b2"
@@ -688,7 +688,7 @@
         />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/Info"
         android:layout_width="116dp"
         android:layout_height="106dp"
         android:text="Place:"
