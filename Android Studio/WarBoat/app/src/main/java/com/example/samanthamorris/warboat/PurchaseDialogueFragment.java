@@ -39,6 +39,7 @@ public class PurchaseDialogueFragment extends DialogFragment {
                         String choice = "yes";
                         listener.onComplete(choice);
 
+
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
