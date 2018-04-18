@@ -35,10 +35,17 @@ public class GamePlay extends AppCompatActivity {
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
         int childCount = mainGrid.getChildCount();
 
+        //Checks and sets which ships are sunk
+        for(int i = 0; i < 4; i++)
+        {
+            GridManager[whichGrid].setSunk(i);
+        }
 
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
-            if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
+            if(GridManager[whichGrid].getSunkPoints().contains(displayMap.get(button.getId()))) {
+                button.setBackgroundColor(Color.GREEN);
+            } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
                 button.setBackgroundColor(Color.RED);
             } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
                 button.setBackgroundColor(Color.GRAY);

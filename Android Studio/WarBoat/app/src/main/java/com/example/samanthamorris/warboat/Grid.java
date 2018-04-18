@@ -19,6 +19,7 @@ public class Grid extends AppCompatActivity {
     }
     private ArrayList<Integer> SHIP_POINTS = new ArrayList<Integer>();
     private ArrayList<Integer> ATTACK_POINTS = new ArrayList<Integer>();
+    private ArrayList<Integer> SUNK_POINTS = new ArrayList<Integer>();
 
     public int[] AircraftCarrier = new int[5];
     public int[] WarBoat = new int[4];
@@ -188,18 +189,27 @@ public class Grid extends AppCompatActivity {
     }
 
     // Checks if a ship has been sunk
-    public boolean isSunk(int ShipCoordinates)
+    public void setSunk(int ShipCoordinates)
     {
+        boolean isSunk = true;
         for (int i = 0; i < Ships[ShipCoordinates].length; i++)
         {
-            if (!ATTACK_POINTS.contains(Ships[ShipCoordinates][i]))
+            if (!(ATTACK_POINTS.contains(Ships[ShipCoordinates][i])) || SUNK_POINTS.contains(Ships[ShipCoordinates][i]))
             {
-                return false;
+                isSunk = false;
             }
         }
-        return true;
+        if (isSunk)
+        {
+            for (int j = 0; j < Ships[ShipCoordinates].length; j++) {
+
+                SUNK_POINTS.add(Ships[ShipCoordinates][j]);
+            }
+        }
 
     }
 
-
+    public ArrayList<Integer> getSunkPoints() {
+        return SUNK_POINTS;
+    }
 }
