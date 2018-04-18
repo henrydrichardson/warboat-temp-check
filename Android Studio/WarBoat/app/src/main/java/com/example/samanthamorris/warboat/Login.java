@@ -126,6 +126,7 @@ public class Login extends AppCompatActivity implements
         }
         else {
             Log.d("SIGNON RESULT","UNSUCCESSFUL SIGNON");
+            Log.d("wtf", "handleSignInResult:" + result.getStatus().toString());
         }
 
     }
