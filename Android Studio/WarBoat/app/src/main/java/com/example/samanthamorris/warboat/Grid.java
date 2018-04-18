@@ -130,7 +130,7 @@ public class Grid extends AppCompatActivity {
         return ATTACK_POINTS;
     }
 
-    //Finding all the hit blocks on the grid
+    //Finding all the sunk blocks on the grid
     public ArrayList<Integer> getHitPoints()
     {
         ArrayList<Integer> Hits = new ArrayList<Integer>();
@@ -146,7 +146,7 @@ public class Grid extends AppCompatActivity {
         return Hits;
     }
 
-    //Finding all the hit blocks on the grid
+    //Finding all the sunk blocks on the grid
     public ArrayList<Integer> getMissPoints()
     {
         ArrayList<Integer> Misses = new ArrayList<Integer>();

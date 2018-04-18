@@ -1,21 +1,11 @@
 package com.example.samanthamorris.warboat;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebHistoryItem;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.util.Log;
-import android.view.View;
-import android.widget.GridLayout;
 import android.widget.Button;
-import android.os.SystemClock;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -49,7 +39,7 @@ public class GamePlay extends AppCompatActivity {
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
             if(GridManager[whichGrid].getSunkPoints().contains(displayMap.get(button.getId()))) {
-                button.setBackgroundColor(Color.GREEN);
+                button.setBackground(getDrawable(R.drawable.sunk));
             } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
                 button.setBackground(getDrawable(R.drawable.hit));
             } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
