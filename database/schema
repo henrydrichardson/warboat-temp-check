@@ -2,7 +2,7 @@ Create database WarBoat;
 
 CREATE TABLE WarBoat.Player (
 	uniqueId int auto_increment, 
-    GamerTag VARCHAR(20), 
+    gamer_tag VARCHAR(20), 
     Email VARCHAR(50) unique, 
     Wins mediumint, 
     Loss mediumint, 

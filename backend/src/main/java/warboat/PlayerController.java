@@ -19,6 +19,7 @@ public class PlayerController {
     public @ResponseBody String  addPlayer(@RequestParam String email, @RequestParam String gamerTag) {
         Player n = new Player();
         n.setGamerTag(gamerTag);
+        n.setEmail(email);
         playerRepository.save(n);
         return "Saved";
     }
