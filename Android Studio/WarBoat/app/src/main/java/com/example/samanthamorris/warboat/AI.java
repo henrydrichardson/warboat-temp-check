@@ -19,8 +19,8 @@ public class AI extends Player {
         boolean randomShot = true;
 
         //If we haven;t started finding direction of anything
-       if (( clear.isEmpty() && hit.isEmpty() ) && !(isHit(Human.getLastAttack(), Human)) );
-            randomShot = true;
+       if ((isHit(Human.getLastAttack(), Human)) );
+            randomShot = false;
 
         // First shot will always be random
         if(Human.getAttackPoints().isEmpty()) {
@@ -115,6 +115,7 @@ public class AI extends Player {
             // shot fired but missed,East will be added to the clear list.
             else {
                 clear.add(0);
+                progress = false;
                 return;
             }
         }
