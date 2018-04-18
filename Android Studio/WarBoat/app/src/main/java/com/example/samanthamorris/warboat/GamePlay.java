@@ -103,7 +103,50 @@ public class GamePlay extends AppCompatActivity {
                         //Populate
                         if (!isShipsPlaced) {
                             if (GridManager[0].populateShips(shipTracker, isRotated, displayMap.get(button.getId()))) {
+
                                 shipTracker++;
+                                // Which boat we are placing
+                                if (shipTracker == 0)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 1)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 2)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 3)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 4)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.VISIBLE);
+                                }
+
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -111,8 +154,14 @@ public class GamePlay extends AppCompatActivity {
                                     }
                                 }, 0);
                                 if (shipTracker == 5) {
+                                    findViewById(R.id.placeText).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
                                     isShipsPlaced = true;
-                                  //  SystemClock.sleep(7000);
+                                    //  SystemClock.sleep(7000);
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
