@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/lost"
+        android:layout_width="245dp"
+        android:layout_height="0dp"
+        android:text="Blimey! You Won"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="52dp" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="231dp"
+        android:layout_height="0dp"
+        android:text="Your score:"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="282dp"
+        />
+
+    <TextView
+        android:id="@+id/currency"
+        android:layout_width="151dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/aldrich"
+        android:text="1234"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="339dp" />
+</android.support.constraint.ConstraintLayout>
+
