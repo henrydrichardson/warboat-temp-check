@@ -21,6 +21,7 @@ public class GamePlay extends AppCompatActivity {
     public HashMap<Integer, Integer> displayMap;
     int shipTracker;
     int turn;
+    AI buddy = new AI();
 
 
 
@@ -59,6 +60,7 @@ public class GamePlay extends AppCompatActivity {
         this.shipTracker = 0;
         GridManager[0] = new Grid();
         GridManager[1] = new Grid();
+
 
 
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
@@ -155,7 +157,7 @@ public class GamePlay extends AppCompatActivity {
                                     }
                                 }, 0);
                                 if (shipTracker == 5) {
-                                    findViewById(R.id.placeText).setVisibility(View.INVISIBLE);
+                                    //findViewById(R.id.placeText).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.ac).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.wb).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.ds).setVisibility(View.INVISIBLE);
@@ -183,6 +185,7 @@ public class GamePlay extends AppCompatActivity {
                                     }
                                 }, 0);
                              //   SystemClock.sleep(7000);
+                              /*
                                 int aiAttackLocation = Math.abs(random.nextInt()%64);
                                 boolean previousHit = false;
                                 while (!GridManager[0].setAttackPoint(aiAttackLocation)) {
@@ -190,6 +193,9 @@ public class GamePlay extends AppCompatActivity {
                                     }
                                 if (GridManager[0].getSHIP_POINTS().contains(aiAttackLocation))
                                     previousHit = true;
+                              */
+                              buddy.Attack(GridManager[1], GridManager[0]);
+
                            //     SystemClock.sleep(7000);
 
                                 if(GridManager[0].isGameLost()){
