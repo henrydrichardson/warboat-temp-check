@@ -36,9 +36,14 @@ public class GamePlay extends AppCompatActivity {
         int childCount = mainGrid.getChildCount();
 
         //Checks and sets which ships are sunk
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < GridManager[whichGrid].Ships.length; i++)
         {
             GridManager[whichGrid].setSunk(i);
+        }
+
+        if(GridManager[whichGrid].getNumSunk() == 5)
+        {
+            
         }
 
         for( int j = 0; j < childCount; j++) {
