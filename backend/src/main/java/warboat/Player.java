@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 
 @Entity
-public class Human {
+public class Player {
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Human {
   private ArrayList<Item> purchasedItems;
 
 
-  public Human() {
+  public Player() {
     this.wins = 0;
     this.losses = 0;
     this.currency = 0;

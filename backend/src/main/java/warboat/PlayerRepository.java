@@ -2,9 +2,9 @@ package warboat;
 
 import org.springframework.data.repository.CrudRepository;
 
-import warboat.Human;
+import warboat.Player;
 
 // Auto built by Spring using special bean tech. NO TOUCHY
 
-public interface HumanRepository extends CrudRepository<Human, Long> {
+public interface PlayerRepository extends CrudRepository<Human, Long> {
 }
