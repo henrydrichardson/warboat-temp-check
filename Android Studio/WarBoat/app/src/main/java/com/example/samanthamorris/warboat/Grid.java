@@ -23,6 +23,8 @@ public class Grid extends AppCompatActivity {
 
     public int[][] Ships = {AircraftCarrier, WarBoat, Destroyer, Submarine, PatrolBoat};
 
+    private int Ships_Sunk = 0;
+
     // Adds ships wit their correct points
     public boolean populateShips(int ship, boolean isRotated, int anchor)
     {
@@ -199,11 +201,15 @@ public class Grid extends AppCompatActivity {
 
                 SUNK_POINTS.add(Ships[ShipCoordinates][j]);
             }
+            Ships_Sunk++;
         }
-
     }
 
     public ArrayList<Integer> getSunkPoints() {
         return SUNK_POINTS;
+    }
+
+    public int getNumSunk(){
+        return Ships_Sunk;
     }
 }
