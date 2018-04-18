@@ -1,28 +1,47 @@
 package warboat;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.ArrayList;
+
+@Entity
 public class Human {
 
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int id;
+
   private String gamerTag;
   private int wins;
   private int losses;
-  private int score;
   private int currency;
   private ArrayList<Item> purchasedItems;
 
 
-  public Human(int id) {
-    this.id = id;
-    this.gamerTag = "johnSnow";
-    this.wins = 10;
-    this.losses = 20;
-    this.score = 30;
-    this.currency = 40;
+  public Human() {
+    this.wins = 0;
+    this.losses = 0;
+    this.currency = 0;
   }
 
   public int  getId() {
     return id;
   }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getGamerTag() {
+    return gamerTag;
+  }
+
+  public void setGamerTag(String newGamerTag) {
+    this.gamerTag = newGamerTag;
+  }
+
 
   public int getWins() {
     return wins;
@@ -40,8 +59,8 @@ public class Human {
     return currency;
   }
 
-  public ArrayList<Integer> getPurchased() {
-    return { Item(1), Item(2), Item(4) };
+  public ArrayList<Item> getPurchased() {
+    return purchasedItems;
   }
 
   public void setWins(int newValue) {
