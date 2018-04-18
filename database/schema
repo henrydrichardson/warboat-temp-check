@@ -2,7 +2,7 @@ Create database WarBoat;
 
 CREATE TABLE WarBoat.Player (
 	uniqueId int auto_increment, 
-    GamerTag VARCHAR(20), 
+    gamer_tag VARCHAR(20), 
     Email VARCHAR(50) unique, 
     Wins mediumint, 
     Loss mediumint, 
@@ -12,7 +12,8 @@ CREATE TABLE WarBoat.Player (
 CREATE TABLE Warboat.Item (
 	uniqueId int auto_increment,  
     Name VARCHAR(50), 
-    TextureFile mediumblob,
+    texture_file mediumblob,
+    price int,
     PRIMARY KEY (uniqueId)
     );
 CREATE TABLE WarBoat.Player_Items (
