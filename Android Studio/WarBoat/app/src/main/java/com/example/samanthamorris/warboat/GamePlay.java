@@ -39,13 +39,13 @@ public class GamePlay extends AppCompatActivity {
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
             if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
-                button.setBackgroundColor(Color.RED);
+                button.setBackground(getDrawable(R.drawable.hit));
             } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
-                button.setBackgroundColor(Color.GRAY);
+                button.setBackground(getDrawable(R.drawable.miss));
             } else if (GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId())) && displayShips) {
-                button.setBackgroundColor(Color.BLACK);
+                button.setBackground(getDrawable(R.drawable.lifesaver));
             } else {
-                button.setBackgroundResource(R.drawable.water);
+                button.setBackgroundResource(R.drawable.button_bg_stroke);
             }
         }
 
