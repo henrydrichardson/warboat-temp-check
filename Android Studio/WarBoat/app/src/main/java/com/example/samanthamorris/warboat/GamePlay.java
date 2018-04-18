@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Button;
 
 import java.util.HashMap;
@@ -21,6 +22,8 @@ public class GamePlay extends AppCompatActivity {
     int shipTracker;
     int turn;
 
+
+
     private void redrawGrid(boolean displayShips, int whichGrid) {
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
         int childCount = mainGrid.getChildCount();
@@ -29,11 +32,6 @@ public class GamePlay extends AppCompatActivity {
         for(int i = 0; i < GridManager[whichGrid].Ships.length; i++)
         {
             GridManager[whichGrid].setSunk(i);
-        }
-
-        if(GridManager[whichGrid].getNumSunk() == 5)
-        {
-            
         }
 
         for( int j = 0; j < childCount; j++) {
@@ -145,12 +143,19 @@ public class GamePlay extends AppCompatActivity {
                                     previousHit = true;
                            //     SystemClock.sleep(7000);
 
-                                if (GridManager[(turn+1)%2].isGameLost())
-                                {
+                                if(GridManager[0].isGameLost()){
                                     Intent myIntent = new Intent(GamePlay.this,
                                             LostGame.class);
                                     startActivity(myIntent);
                                 }
+                                else if (GridManager[1].isGameLost())
+                                {
+                                    Intent myIntent = new Intent(GamePlay.this,
+                                            WinGame.class);
+                                    startActivity(myIntent);
+                                }
+
+
 
                                 turn++;
 
