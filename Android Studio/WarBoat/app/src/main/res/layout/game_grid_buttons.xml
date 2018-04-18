@@ -689,12 +689,58 @@
 
     <TextView
         android:id="@+id/Info"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
-        android:text="Place:"
+        android:layout_width="115dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="108dp"
+        android:text="Place in order:"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/ac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aircraft Carrier (5)"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="389dp" />
+        tools:layout_editor_absoluteY="416dp" />
+
+    <TextView
+        android:id="@+id/wb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Warboat (4)"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="435dp" />
+
+    <TextView
+        android:id="@+id/ds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Destroyer (3)"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="454dp" />
+
+    <TextView
+        android:id="@+id/sb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submarine (3)"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="473dp" />
+
+    <TextView
+        android:id="@+id/pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patrol Boat (2)"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="492dp"
+        tools:ignore="MissingConstraints"/>
+
 
 </android.support.constraint.ConstraintLayout>
