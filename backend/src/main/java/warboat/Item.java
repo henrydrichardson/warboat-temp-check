@@ -1,5 +1,7 @@
 package warboat;
 
+import java.awt.Image;
+
 public class Item {
 
   private int id;
@@ -9,15 +11,13 @@ public class Item {
 
 
   public Item(int id) {
-    this.texture = "sample.jpg";
     this.price = 10;
-    this.name = NULL;c
   }
 
   public int  getId() {
     return id;
   }
-  public image getTexture() {
+  public Image getTexture() {
     return texture;
   }
 
@@ -25,7 +25,7 @@ public class Item {
     return price;
   }
 
-  public string getName() {
+  public String getName() {
     return name;
   }
 }
