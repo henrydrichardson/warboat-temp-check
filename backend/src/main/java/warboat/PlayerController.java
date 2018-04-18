@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-public class HumanController {
+public class PlayerController {
     @Autowired
-    private HumanRepository humanRepository;
+    private PlayerRepository playerRepository;
 
 
     @RequestMapping(path="/human/add", method = RequestMethod.GET)
-    public @ResponseBody String  addHuman(@RequestParam String email, @RequestParam String gamerTag) {
-        Human n = new Human();
+    public @ResponseBody String  addPlayer(@RequestParam String email, @RequestParam String gamerTag) {
+        Player n = new Player();
         n.setGamerTag(gamerTag);
-        humanRepository.save(n);
+        playerRepository.save(n);
         return "Saved";
     }
     
