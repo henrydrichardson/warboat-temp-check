@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "819089000832",
+    "firebase_url": "https://warboat-fb67b.firebaseio.com",
+    "project_id": "warboat-fb67b",
+    "storage_bucket": "warboat-fb67b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819089000832:android:f428e25b8ed643e7",
+        "android_client_info": {
+          "package_name": "com.example.samanthamorris.warboat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819089000832-p4o0df49c04m83vh839h7s092v9mfqec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.samanthamorris.warboat",
+            "certificate_hash": "7cb3758c63b79da5c15532fb260026117f535580"
+          }
+        },
+        {
+          "client_id": "819089000832-fu7lq3un0re1e7urp2pkcjka6ejkkbdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6fECmZ4z-HSWsT3WF_CsZcpy19xtQvho"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819089000832-fu7lq3un0re1e7urp2pkcjka6ejkkbdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
