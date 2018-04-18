@@ -14,15 +14,15 @@ public class Player {
   private int id;
 
   private String gamerTag;
+  private String email;
   private int wins;
-  private int losses;
+  private int loss;
   private int currency;
-  private ArrayList<Item> purchasedItems;
 
 
   public Player() {
     this.wins = 0;
-    this.losses = 0;
+    this.loss = 0;
     this.currency = 0;
   }
 
@@ -42,25 +42,29 @@ public class Player {
     this.gamerTag = newGamerTag;
   }
 
+  public String getEmail() {
+    return email;
+  }
+ 
+  public void setEmail(String email) {
+    this.email = email;
+}
+
 
   public int getWins() {
     return wins;
   }
 
   public int getLosses() {
-    return losses;
+    return loss;
   }
 
   public int getScore() {
-    return (wins/losses);
+    return (wins/loss);
   }
 
   public int getCurrency() {
     return currency;
-  }
-
-  public ArrayList<Item> getPurchased() {
-    return purchasedItems;
   }
 
   public void setWins(int newValue) {
@@ -68,13 +72,11 @@ public class Player {
   }
 
   public void setLosses(int newValue) {
-    this.losses = newValue;
+    this.loss = newValue;
   }
 
   public void setCurrency(int newValue) {
     this.currency = newValue;
   }
-
-
 
 }
