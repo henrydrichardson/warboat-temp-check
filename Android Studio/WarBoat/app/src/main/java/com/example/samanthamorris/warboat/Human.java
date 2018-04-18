@@ -11,7 +11,7 @@ public class Human extends Player {
         PlayerGrid = new Grid();
     }
 
-    public int Attack()
+    public int Attack(Grid PlayerGrid, Grid AIGrid)
     {
         boolean needInput = true;
 
