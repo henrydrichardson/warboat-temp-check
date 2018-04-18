@@ -128,6 +128,16 @@ public class Grid extends AppCompatActivity {
         return ATTACK_POINTS;
     }
 
+    //Returning Most Recent Attack Point
+    public int getLastAttack()
+    {
+        if (ATTACK_POINTS != null && !ATTACK_POINTS.isEmpty()) {
+            return ATTACK_POINTS.get(ATTACK_POINTS.size()-1);
+        }
+
+        return -1;
+    }
+
     //Finding all the hit blocks on the grid
     public ArrayList<Integer> getHitPoints()
     {
