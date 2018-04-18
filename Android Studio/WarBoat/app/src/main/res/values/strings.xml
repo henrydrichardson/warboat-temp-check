@@ -118,4 +118,11 @@
     <string name="no">No</string>
 
 
+
+    <string name="title_activity_login2">Sign in</string>
+
+
+    <string name="server_client_id">856130093606-q1dg1315japbdveffj4nmv4726m6njme.apps.googleusercontent.com</string>
+
+
 </resources>

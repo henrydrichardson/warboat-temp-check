@@ -1,21 +1,12 @@
 package com.example.samanthamorris.warboat;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebHistoryItem;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.util.Log;
-import android.view.View;
-import android.widget.GridLayout;
+
 import android.widget.Button;
-import android.os.SystemClock;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -31,21 +22,24 @@ public class GamePlay extends AppCompatActivity {
     int shipTracker;
     int turn;
 
+
+
     private void redrawGrid(boolean displayShips, int whichGrid) {
         android.support.v7.widget.GridLayout mainGrid = (android.support.v7.widget.GridLayout) findViewById(R.id.mainGrid);
         int childCount = mainGrid.getChildCount();
 
         //Checks and sets which ships are sunk
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < GridManager[whichGrid].Ships.length; i++)
         {
             GridManager[whichGrid].setSunk(i);
         }
 
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
-            if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
+            if(GridManager[whichGrid].getSunkPoints().contains(displayMap.get(button.getId()))) {
+                button.setBackground(getDrawable(R.drawable.sunk));
+            } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
                 button.setBackground(getDrawable(R.drawable.hit));
->>>>>>> 7a791313ba6dac3cde634dc8b601e14fe4085bb3
             } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
                 button.setBackground(getDrawable(R.drawable.miss));
             } else if (GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId())) && displayShips) {
@@ -110,7 +104,50 @@ public class GamePlay extends AppCompatActivity {
                         //Populate
                         if (!isShipsPlaced) {
                             if (GridManager[0].populateShips(shipTracker, isRotated, displayMap.get(button.getId()))) {
+
                                 shipTracker++;
+                                // Which boat we are placing
+                                if (shipTracker == 0)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 1)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 2)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 3)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                }
+                                else if (shipTracker == 4)
+                                {
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.VISIBLE);
+                                }
+
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -118,8 +155,14 @@ public class GamePlay extends AppCompatActivity {
                                     }
                                 }, 0);
                                 if (shipTracker == 5) {
+                                    findViewById(R.id.placeText).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ac).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.wb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.ds).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.sb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.pb).setVisibility(View.INVISIBLE);
                                     isShipsPlaced = true;
-                                  //  SystemClock.sleep(7000);
+                                    //  SystemClock.sleep(7000);
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -149,12 +192,19 @@ public class GamePlay extends AppCompatActivity {
                                     previousHit = true;
                            //     SystemClock.sleep(7000);
 
-                                if (GridManager[(turn+1)%2].isGameLost())
-                                {
+                                if(GridManager[0].isGameLost()){
                                     Intent myIntent = new Intent(GamePlay.this,
                                             LostGame.class);
                                     startActivity(myIntent);
                                 }
+                                else if (GridManager[1].isGameLost())
+                                {
+                                    Intent myIntent = new Intent(GamePlay.this,
+                                            WinGame.class);
+                                    startActivity(myIntent);
+                                }
+
+
 
                                 turn++;
 
