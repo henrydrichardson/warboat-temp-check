@@ -43,16 +43,15 @@ public class GamePlay extends AppCompatActivity {
 
         for( int j = 0; j < childCount; j++) {
             final Button button = (Button) mainGrid.getChildAt(j);
-            if(GridManager[whichGrid].getSunkPoints().contains(displayMap.get(button.getId()))) {
-                button.setBackgroundColor(Color.GREEN);
-            } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
-                button.setBackgroundColor(Color.RED);
+            if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId())) && GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId()))){
+                button.setBackground(getDrawable(R.drawable.hit));
+>>>>>>> 7a791313ba6dac3cde634dc8b601e14fe4085bb3
             } else if (GridManager[whichGrid].getAttackPoints().contains(displayMap.get(button.getId()))) {
-                button.setBackgroundColor(Color.GRAY);
+                button.setBackground(getDrawable(R.drawable.miss));
             } else if (GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId())) && displayShips) {
-                button.setBackgroundColor(Color.BLACK);
+                button.setBackground(getDrawable(R.drawable.lifesaver));
             } else {
-                button.setBackgroundColor(Color.TRANSPARENT);
+                button.setBackgroundResource(R.drawable.button_bg_stroke);
             }
         }
 
