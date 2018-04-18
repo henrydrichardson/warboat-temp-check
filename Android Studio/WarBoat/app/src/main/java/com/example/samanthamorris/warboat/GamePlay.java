@@ -45,7 +45,7 @@ public class GamePlay extends AppCompatActivity {
             } else if (GridManager[whichGrid].getSHIP_POINTS().contains(displayMap.get(button.getId())) && displayShips) {
                 button.setBackgroundColor(Color.BLACK);
             } else {
-                button.setBackgroundColor(Color.TRANSPARENT);
+                button.setBackgroundResource(R.drawable.water);
             }
         }
 
