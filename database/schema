@@ -12,7 +12,8 @@ CREATE TABLE WarBoat.Player (
 CREATE TABLE Warboat.Item (
 	uniqueId int auto_increment,  
     Name VARCHAR(50), 
-    TextureFile mediumblob,
+    texture_file mediumblob,
+    price int,
     PRIMARY KEY (uniqueId)
     );
 CREATE TABLE WarBoat.Player_Items (

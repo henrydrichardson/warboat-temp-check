@@ -1,24 +1,31 @@
 package warboat;
 
-import java.awt.Image;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.sql.Blob;
 
+@Entity
 public class Item {
 
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int id;
-  private Image texture;
+
+  private Blob textureFile;
   private int price;
   private String name;
 
 
-  public Item(int id) {
-    this.price = 10;
+  public Item() {
   }
 
   public int  getId() {
     return id;
   }
-  public Image getTexture() {
-    return texture;
+  public Blob getTexture() {
+    return textureFile;
   }
 
   public int getPrice() {
