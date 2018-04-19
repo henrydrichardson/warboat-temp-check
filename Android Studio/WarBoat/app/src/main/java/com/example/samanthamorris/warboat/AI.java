@@ -1,339 +1,101 @@
 package com.example.samanthamorris.warboat;
 import java.util.ArrayList;
-
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.Random;
+import java.util.Stack;
 
 public class AI extends Player {
 
-      public static final int GRIDLENGTH = 8;
-      ArrayList<Integer> hit = new ArrayList<>();
-      ArrayList<Integer> clear = new ArrayList<>(); //checking whether the direction is clear, ie. no ship there, East=0, South=1, West=2, North=3
-      boolean progress = false;
-      int  mostRecentInitial;
-      boolean SunkMostRecent = false;
-      boolean rotation = false; // FALSE IS HORIZONTAL
+    public static final int GRIDLENGTH = 8;
 
-    public int Attack(Grid AI, Grid Human) {
+    Deque<Integer> stack = new ArrayDeque<Integer>();
 
-        //Assume first shot is random unless proven otherwise
-        int initial = 0;
-        boolean randomShot = true;
 
-        //If we haven;t started finding direction of anything
-       if ((isHit(Human.getLastAttack(), Human)) );
-            randomShot = false;
 
-        // First shot will always be random
-        if(Human.getAttackPoints().isEmpty()) {
-            initial = (int) (Math.random() * (GRIDLENGTH * GRIDLENGTH));
-            if (isHit(initial, Human)) {
-                mostRecentInitial = initial;
-                recordShot(initial, Human);
-                return -1;
-            }
-            else
-                recordShot(initial, Human);
+    public int Attack(Grid AiGrid, Grid human) {
+
+        if (stack.isEmpty()) {
+            Hunt(human);
+            return 1;
         }
-
-        //SUnk most recent
-        if (SunkMostRecent) {
-            initial = (int) (Math.random() * (GRIDLENGTH * GRIDLENGTH));
-            if (isHit(initial, Human)) {
-                mostRecentInitial = initial;
-                recordShot(initial, Human);
-                return -1;
-            } else
-                recordShot(initial, Human);
+        else {
+            Target(human);
         }
-
-        // If Last hit was still random
-        if (randomShot) {
-            initial = (int) (Math.random() * (GRIDLENGTH * GRIDLENGTH));
-           while(Human.getAttackPoints().contains(initial)) {
-               initial = (int) (Math.random() * (GRIDLENGTH * GRIDLENGTH));
-           }
-            if (isHit(initial, Human)) {
-                mostRecentInitial = initial;
-                recordShot(initial, Human);
-                return -1;
-            }
-            else
-                recordShot(initial, Human);
-        }
-
-        if(!randomShot) {
-            initial = mostRecentInitial;
-            if(progress == false) {
-                findDirection(initial, Human);
-            }
-            else {
-                tryToSink(initial, Human);
-            }
-
-
-        }
-
-
-
-
-
         return 0;
     }
 
-    public void findDirection(int initial, Grid Human) {
-
-        //Are we closer to finding the ship?
-
-        int fire = initial;
-        // the "hit" and "clear" lists, will be used later to determine
-        // which direction the ship is oriented (i.e. East=0, South=1, West=2, North=3)
-        if(!hit.contains(0) || !clear.contains(0)) {
-            if (!Human.getAttackPoints().contains(fire + 1))
-                // begin by checking the square to the east
-                // make sure that square hasn't already been hit,
-                // adjust x value by 1, moving the target to the east.
-                fire++;
-            // checking again to be sure that haven't already shot there
-            // and that the new X coordinate isnt out of bounds
-            if (!Human.getAttackPoints().contains(fire) && !invalidShot(fire)) {
-                // fire with the adjusted coordinates and record it into shots
-                progress = isHit(fire, Human);
-                recordShot(fire, Human);
-            }
-                // If the coordinate would have been out of bounds, or if for some reason
-                // east is doesn't have more ship, then we add it to clear
-            else {
-                clear.add(0);
-                return;
-            }
-            // If the shot was successful, it adds the coordinates to hits and
-            // Assigns 0 or "East" to the hit list, signifying the boat points that way.
-            if (progress) {
-                hit.add(0);
-                rotation = false;
-                return;
-            }
-            // shot fired but missed,East will be added to the clear list.
-            else {
-                clear.add(0);
-                progress = false;
-                return;
-            }
+    public void Hunt(Grid human) {
+        int initial = generateEvenParity();
+        while(human.getAttackPoints().contains(initial)) {
+            initial = generateEvenParity();
         }
 
-        fire = initial;
-        progress = false;
+        recordShot(initial, human);
+        for(int i = 0; i < 5; i++)
+            human.setSunk(i);
 
-        if(!hit.contains(1) || !clear.contains(1)) {
-            if (!Human.getAttackPoints().contains(fire + GRIDLENGTH))
-                // begin by checking the square to the east
-                // make sure that square hasn't already been hit,
-                // adjust x value by 1, moving the target to the east.
-                fire += GRIDLENGTH;
-            // checking again to be sure that haven't already shot there
-            // and that the new X coordinate isnt out of bounds
-            if (!Human.getAttackPoints().contains(fire) && !invalidShot(fire)) {
-                // fire with the adjusted coordinates and record it into shots
-                progress = isHit(fire, Human);
-                recordShot(fire, Human);
+
+        if(isHit(initial, human)) {
+
+            int north = calcNorth(initial);
+            int west = calcWest(initial);
+            int south = calcSouth(initial);
+            int east = calcEast(initial);
+
+
+            if( ( !invalidShot(north) && !human.getAttackPoints().contains(north) )   ) {
+                stack.push(north);
             }
-            // If the coordinate would have been out of bounds, or if for some reason
-            // east is doesn't have more ship, then we add it to clear
-            else {
-                clear.add(1);
-                return;
+            if( ( !invalidShot(west) && !human.getAttackPoints().contains(west) )   ) {
+                stack.push(west);
             }
-            // If the shot was successful, it adds the coordinates to hits and
-            // Assigns 1 or "South" to the hit list, signifying the boat points that way.
-            if (progress) {
-                hit.add(1);
-                rotation = true;
-                return;
+            if( ( !invalidShot(south) && !human.getAttackPoints().contains(south) )   ) {
+                stack.push(south);
             }
-            // shot fired but missed,South will be added to the clear list.
-            else {
-                clear.add(1);
-                return;
+            if( ( !invalidShot(east) && !human.getAttackPoints().contains(east) )   ) {
+                stack.push(east);
+
             }
         }
-
-        fire = initial;
-        progress = false;
-        // the "hit" and "clear" lists, will be used later to determine
-        // which direction the ship is oriented (i.e. East=0, South=1, West=2, North=3)
-        if(!hit.contains(2) || !clear.contains(2)) {
-            if (!Human.getAttackPoints().contains(fire - 1))
-                // begin by checking the square to the east
-                // make sure that square hasn't already been hit,
-                // adjust x value by 1, moving the target to the east.
-                fire--;
-            // checking again to be sure that haven't already shot there
-            // and that the new X coordinate isnt out of bounds
-            if (!Human.getAttackPoints().contains(fire) && !invalidShot(fire)) {
-                // fire with the adjusted coordinates and record it into shots
-                progress = isHit(fire, Human);
-                recordShot(fire, Human);
-            }
-            // If the coordinate would have been out of bounds, or if for some reason
-            // east is doesn't have more ship, then we add it to clear
-            else {
-                clear.add(2);
-                return;
-            }
-            // If the shot was successful, it adds the coordinates to hits and
-            // Assigns 12or "WEst" to the hit list, signifying the boat points that way.
-            if (progress) {
-                hit.add(2);
-                rotation = false;
-                return;
-            }
-            // shot fired but missed,East will be added to the clear list.
-            else {
-                clear.add(2);
-                return;
-            }
-        }
-
-        fire = initial;
-        // the "hit" and "clear" lists, will be used later to determine
-        // which direction the ship is oriented (i.e. East=0, South=1, West=2, North=3)
-        if(!hit.contains(3) || !clear.contains(3)) {
-            if (!Human.getAttackPoints().contains(fire - GRIDLENGTH))
-                // begin by checking the square to the east
-                // make sure that square hasn't already been hit,
-                // adjust x value by 1, moving the target to the east.
-                fire -= GRIDLENGTH;
-            // checking again to be sure that haven't already shot there
-            // and that the new X coordinate isnt out of bounds
-            if (!Human.getAttackPoints().contains(fire) && !invalidShot(fire)) {
-                // fire with the adjusted coordinates and record it into shots
-                progress = isHit(fire, Human);
-                recordShot(fire, Human);
-            }
-            // If the coordinate would have been out of bounds, or if for some reason
-            // east is doesn't have more ship, then we add it to clear
-            else {
-                clear.add(3);
-                return;
-            }
-            // If the shot was successful, it adds the coordinates to hits and
-            // Assigns 3 or "North" to the hit list, signifying the boat points that way.
-            if (progress) {
-                hit.add(3);
-                rotation = true;
-                return;
-            }
-            // shot fired but missed,East will be added to the clear list.
-            else {
-                clear.add(3);
-                return;
-            }
-        }
-
     }
 
-    public void tryToSink(int initial, Grid Human) {
-        // Now since we know where we going....
-        int fire = initial;
-        //boolean localProgress = false;
+    public void Target(Grid human) {
+         int initial = stack.pop();
 
-        // This will run if the East is a hit.
-        if (hit.contains(0)) {
-            // use this to shoot down the row until progress is false,
-            // then add the east side to the clear list.
-            if(!invalidShot(fire) && !Human.getAttackPoints().contains(fire) && !clear.contains(0)) {
-                fire++;
-                // If we havent shot here let's check whether we keep going
-                if (!Human.getAttackPoints().contains(fire)) {
-                    progress = isHit(fire, Human);
-                    recordShot(fire, Human);
-                    SunkMostRecent = didShotSink(fire, Human);
-                    if (SunkMostRecent) {
-                        clear.removeAll(clear);
-                        hit.removeAll(hit);
+         recordShot(initial, human);
+        for(int i = 0; i < 5; i++)
+            human.setSunk(i);
+
+
+        if(isHit(initial, human)) {
+
+                if(didShotSink(initial, human)) {
+                    while(!stack.isEmpty()) {
+                        stack.pop();
                     }
-                    // If progress is false, East is added to the clear list.
-                    if (!progress) {
-                        clear.add(0);
-                        if(rotation == false)
-                            hit.add(2);
-                    }
+                    return;
                 }
-            }
-        }
 
-        if (hit.contains(1)) {
-            // use this to shoot down the row until progress is false,
-            // then add the east side to the clear list.
-            if(!invalidShot(fire) && !Human.getAttackPoints().contains(fire) && !clear.contains(0)) {
-                fire++;
-                // If we havent shot here let's check whether we keep going
-                if (!Human.getAttackPoints().contains(fire)) {
-                    progress = isHit(fire, Human);
-                    recordShot(fire, Human);
-                    SunkMostRecent = didShotSink(fire, Human);
-                    if (SunkMostRecent) {
-                        clear.removeAll(clear);
-                        hit.removeAll(hit);
-                    }
-                    // If progress is false, East is added to the clear list.
-                    if (!progress) {
-                        clear.add(1);
-                        if(rotation == true)
-                            hit.add(3);
-                    }
+                int north = calcNorth(initial);
+                int west = calcWest(initial);
+                int south = calcSouth(initial);
+                int east = calcEast(initial);
+
+                if( ( !invalidShot(north) && !human.getAttackPoints().contains(north) )   ) {
+                    stack.push(north);
                 }
-            }
-        }
-
-        if (hit.contains(2)) {
-            // use this to shoot down the row until progress is false,
-            // then add the east side to the clear list.
-            if(!invalidShot(fire) && !Human.getAttackPoints().contains(fire) && !clear.contains(0)) {
-                fire++;
-                // If we havent shot here let's check whether we keep going
-                if (!Human.getAttackPoints().contains(fire)) {
-                    progress = isHit(fire, Human);
-                    recordShot(fire, Human);
-                    SunkMostRecent = didShotSink(fire, Human);
-                    if (SunkMostRecent) {
-                        clear.removeAll(clear);
-                        hit.removeAll(hit);
-                    }
-                    // If progress is false, East is added to the clear list.
-                    if (!progress) {
-                        clear.add(2);
-                        if(rotation == true)
-                            hit.add(3);
-                    }
+                if( ( !invalidShot(west) && !human.getAttackPoints().contains(west) )   ) {
+                    stack.push(west);
                 }
-            }
-        }
-
-        if (hit.contains(3)) {
-            // use this to shoot down the row until progress is false,
-            // then add the east side to the clear list.
-            if(!invalidShot(fire) && !Human.getAttackPoints().contains(fire) && !clear.contains(0)) {
-                fire++;
-                // If we havent shot here let's check whether we keep going
-                if (!Human.getAttackPoints().contains(fire)) {
-                    progress = isHit(fire, Human);
-                    recordShot(fire, Human);
-                    SunkMostRecent = didShotSink(fire, Human);
-                    if (SunkMostRecent) {
-                        clear.removeAll(clear);
-                        hit.removeAll(hit);
-                    }
-                    // If progress is false, East is added to the clear list.
-                    if (!progress) {
-                        clear.add(3);
-                        if(rotation == true)
-                            hit.add(3);
-                    }
+                if( ( !invalidShot(south) && !human.getAttackPoints().contains(south) )   ) {
+                    stack.push(south);
                 }
-            }
+                if( ( !invalidShot(east) && !human.getAttackPoints().contains(east) )   ) {
+                    stack.push(east);
+                }
+
         }
-
-
     }
 
     public boolean isHit(int attackLocation, Grid HumanGrid) {
@@ -352,16 +114,17 @@ public class AI extends Player {
             HumanGrid.getHitPoints().add(attackLocation);
 
         }
-            else {
-                HumanGrid.getAttackPoints().add(attackLocation);
-                HumanGrid.getMissPoints().add(attackLocation);
+        else {
+            HumanGrid.getAttackPoints().add(attackLocation);
+            HumanGrid.getMissPoints().add(attackLocation);
 
-            }
+        }
     }
+
+
 
     public boolean invalidShot(int attackLocation)
     {
-        boolean invalid = false;
         int row = attackLocation % GRIDLENGTH;
         if(row < 0 || row >= GRIDLENGTH)
             return true;
@@ -373,11 +136,53 @@ public class AI extends Player {
 
     public boolean didShotSink(int attackLocation, Grid Human)
     {
+
+
         if(Human.getSunkPoints().contains(attackLocation))
             return true;
         else
             return false;
     }
+
+    public int calcNorth(int attackLocation) {
+        return attackLocation - GRIDLENGTH;
+
+    }
+
+    public int calcEast(int attackLocation) {
+        return attackLocation + 1;
+    }
+
+    public int calcSouth(int attackLocation) {
+        return attackLocation + GRIDLENGTH;
+    }
+
+    public int calcWest(int attackLocation) {
+        return attackLocation - 1;
+    }
+
+    public int generateEvenNumber(int min, int max) {
+        Random rand = new Random();
+        min = min % 2 == 1 ? min + 1 : min; // If min is odd, add one to make sure the integer division can´t create a number smaller min;
+        max = max % 2 == 1 ? max - 1 : max; // If max is odd, subtract one to make sure the integer division can´t create a number greater max;
+        int randomNum = ((rand.nextInt((max - min)) + min) + 1) / 2; // Divide both by 2 to ensure the range
+        return randomNum * 2; // multiply by 2 to make the number even
+    }
+
+    public int generateEvenParity() {
+       int[] array = {1, 3, 5, 7,
+                        8, 10, 12, 14,
+                    17, 19, 21, 23,
+                    24, 26, 28, 30,
+                    33, 35, 37, 39,
+                    40, 42, 44, 46,
+                    49, 51, 53, 55,
+                    56, 58, 60,  63};
+        int random = (int)(Math.random() * (32) );
+
+        return array[random];
+    }
+
 
 
 }
