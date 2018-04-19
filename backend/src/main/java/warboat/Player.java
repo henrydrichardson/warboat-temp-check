@@ -1,10 +1,9 @@
 package warboat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Player {
@@ -19,6 +18,15 @@ public class Player {
   private int loss;
   private int currency;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            })
+    @JoinTable(name = "Player_Items",
+            joinColumns = { @JoinColumn(name = "fk_player") },
+            inverseJoinColumns = { @JoinColumn(name = "fk_items") })
+    private Set<Item> purchasedItems = new HashSet<>();
 
   public Player() {
     this.wins = 0;
@@ -87,4 +95,7 @@ public class Player {
     this.currency = newValue;
   }
 
+  public Set<Item> getItems() {
+    return this.purchasedItems;
+  }
 }

@@ -2,6 +2,7 @@ package warboat;
 
 import java.util.concurrent.atomic.AtomicLong;
 import java.lang.Integer;
+import java.lang.Long;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlayerController {
     @Autowired
     private PlayerRepository playerRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     @RequestMapping(path="/human/check", method = RequestMethod.GET)
    public @ResponseBody String checkPlayer(@RequestParam String email) {
@@ -50,12 +54,25 @@ public class PlayerController {
         Player n = playerRepository.findByEmail(email).get(0);
             return String.valueOf(n.getCurrency());
         }
+    @RequestMapping(path="/human/get/items", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Item>  getItems(@RequestParam String email) {
+        Player n = playerRepository.findByEmail(email).get(0);
+            return n.getItems();
+        }
     @RequestMapping(path="/human/update/currency", method = RequestMethod.GET)
     public @ResponseBody String  updateCurrency(@RequestParam String email, @RequestParam String latestValue) {
         Player n = playerRepository.findByEmail(email).get(0);
 	n.setCurrency(Integer.parseInt(latestValue));
 	playerRepository.save(n);
 	return String.valueOf(n.getCurrency());
+        }
+    @RequestMapping(path="/human/update/items", method = RequestMethod.GET)
+    public @ResponseBody String  updateItems(@RequestParam String email, @RequestParam String newItem) {
+        Player n = playerRepository.findByEmail(email).get(0);
+	Item i = itemRepository.findById(Integer.parseInt(newItem)).get();
+	n.getItems().add(i);
+	playerRepository.save(n);
+	return "Success";
         }
 
 //    @RequestMapping(path="/human", method = RequestMethod.POST)
