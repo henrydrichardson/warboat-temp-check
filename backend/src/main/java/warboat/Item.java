@@ -11,9 +11,9 @@ public class Item {
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private int id;
+  private int uniqueid;
 
-  private Blob textureFile;
+  private byte[] textureFile;
   private int price;
   private String name;
 
@@ -22,9 +22,9 @@ public class Item {
   }
 
   public int  getId() {
-    return id;
+    return uniqueid;
   }
-  public Blob getTexture() {
+  public byte[] getTexture() {
     return textureFile;
   }
 

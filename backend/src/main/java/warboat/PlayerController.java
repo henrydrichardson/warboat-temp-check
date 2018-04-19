@@ -1,6 +1,7 @@
 package warboat;
 
 import java.util.concurrent.atomic.AtomicLong;
+import java.lang.Integer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +34,30 @@ public class PlayerController {
         playerRepository.save(n);
         return "Saved";
     }
-    
+
+    @RequestMapping(path="/human/get/score", method = RequestMethod.GET)
+    public @ResponseBody String  getScore(@RequestParam String email) {
+        Player n = playerRepository.findByEmail(email).get(0);
+	if(n.getWins() == 0 & n.getLosses() == 0) {
+            return "0";
+        } else {
+            return String.valueOf(n.getScore());
+        }
+    }
+
+    @RequestMapping(path="/human/get/currency", method = RequestMethod.GET)
+    public @ResponseBody String  getCurrency(@RequestParam String email) {
+        Player n = playerRepository.findByEmail(email).get(0);
+            return String.valueOf(n.getCurrency());
+        }
+    @RequestMapping(path="/human/update/currency", method = RequestMethod.GET)
+    public @ResponseBody String  updateCurrency(@RequestParam String email, @RequestParam String latestValue) {
+        Player n = playerRepository.findByEmail(email).get(0);
+	n.setCurrency(Integer.parseInt(latestValue));
+	playerRepository.save(n);
+	return String.valueOf(n.getCurrency());
+        }
+
 //    @RequestMapping(path="/human", method = RequestMethod.POST)
 //    public Human human(@RequestParam(value="id") int id) {
 //        Human currentHuman = new Human(id);
