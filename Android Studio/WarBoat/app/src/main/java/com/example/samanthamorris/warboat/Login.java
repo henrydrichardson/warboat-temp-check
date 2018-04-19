@@ -27,6 +27,8 @@ public class Login extends AppCompatActivity implements
 
     private static final int RC = 49404;
 
+    public static GoogleSignInAccount account;
+
     // The core Google Play Services client.
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -93,11 +95,9 @@ public class Login extends AppCompatActivity implements
             @Override
             public void onResponse(String response) {
 
-                if (response == "True") {
+
                     Log.i("Login", "User Exists");
                     updateUI(account);
-
-                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity implements
 
     private void handleSignInResult(Task<GoogleSignInAccount> result) {
         try {
-            GoogleSignInAccount account = result.getResult(ApiException.class);
+            account = result.getResult(ApiException.class);
             checkUser(account);
         } catch (ApiException e) {
             Log.w("Login", "signInResult: failed code=" + e.getStatusCode());
