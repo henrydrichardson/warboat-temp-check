@@ -1,10 +1,13 @@
 package com.example.samanthamorris.warboat;
 
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.*;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.common.api.ApiException;
+import com.android.volley.*;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
@@ -73,7 +76,7 @@ public class Login extends AppCompatActivity implements
 
     public void onClick(View view) {
 
-                signIn();
+        signIn();
 
     }
 
@@ -82,17 +85,62 @@ public class Login extends AppCompatActivity implements
         startActivityForResult(signInIntent, RC);
     }
 
+    private void checkUser(final GoogleSignInAccount account) {
+        String url = "http://10.32.224.175:8080/human/check?email=" + account.getEmail();
+        final RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (response == "True") {
+                    Log.i("Login", "User Exists");
+                    updateUI(account);
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+
+                Log.i("Login", "Registering User");
+
+                String registerUrl = "http://10.32.224.175:8080/human/add?email=" + account.getEmail() + "&gamerTag=" + account.getDisplayName();
+                StringRequest registerRequest = new StringRequest(Request.Method.GET, registerUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i("Login", "Successful Register");
+                        updateUI(account);
+                    }
+
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        Log.e("Login", "Error:" + e);
+                    }
+                });
+                queue.add(registerRequest);
+            }
+        }
+        );
+
+        queue.add(stringRequest);
+
+    }
+
     private void updateUI(GoogleSignInAccount account) {
+
 
         Intent myIntent = new Intent(this,
                 StartupScreen.class);
         startActivity(myIntent);
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> result ) {
+    private void handleSignInResult(Task<GoogleSignInAccount> result) {
         try {
             GoogleSignInAccount account = result.getResult(ApiException.class);
-            updateUI(account);
+            checkUser(account);
         } catch (ApiException e) {
             Log.w("Login", "signInResult: failed code=" + e.getStatusCode());
         }

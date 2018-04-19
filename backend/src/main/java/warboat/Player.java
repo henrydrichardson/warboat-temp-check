@@ -11,7 +11,7 @@ public class Player {
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private int id;
+  private int uniqueid;
 
   private String gamerTag;
   private String email;
@@ -26,12 +26,20 @@ public class Player {
     this.currency = 0;
   }
 
-  public int  getId() {
-    return id;
+  public Player(String gamerTag, String email, int wins, int loss, int currency) {
+    this.gamerTag = gamerTag;
+    this.email = email;
+    this.wins = wins;
+    this.loss = loss;
+    this.currency = currency;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public int  getId() {
+    return uniqueid;
+  }
+
+  public void setId(Integer uniqueid) {
+    this.uniqueid = uniqueid;
   }
 
   public String getGamerTag() {
