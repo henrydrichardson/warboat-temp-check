@@ -32,10 +32,6 @@ public class Login extends AppCompatActivity implements
     // The core Google Play Services client.
     private GoogleSignInClient mGoogleSignInClient;
 
-    // A progress dialog to display when the user is connecting in
-    // case there is a delay in any of the dialogs being ready.
-    private ProgressDialog mConnectionProgressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +51,6 @@ public class Login extends AppCompatActivity implements
     @Override
     public void onStart() {
         super.onStart();
-
-        //Check if already logged in
-        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        //updateUI(account);
     }
 
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -88,7 +80,7 @@ public class Login extends AppCompatActivity implements
     }
 
     private void checkUser(final GoogleSignInAccount account) {
-        String url = "http://10.32.224.175:8080/human/check?email=" + account.getEmail();
+        String url = BuildConfig.URL_SERVER + "/human/check?email=" + account.getEmail();
         final RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -105,7 +97,7 @@ public class Login extends AppCompatActivity implements
 
                 Log.i("Login", "Registering User");
 
-                String registerUrl = "http://10.32.224.175:8080/human/add?email=" + account.getEmail() + "&gamerTag=" + account.getDisplayName();
+                String registerUrl = BuildConfig.URL_SERVER + "/human/add?email=" + account.getEmail() + "&gamerTag=" + account.getDisplayName();
                 StringRequest registerRequest = new StringRequest(Request.Method.GET, registerUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -8,18 +8,16 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+
 import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -47,7 +45,7 @@ public class GamePlay extends AppCompatActivity {
 
     private void updateWithLoss() {
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String lostUrl = "http://10.32.224.175:8080/human/update/lost?email=" + Login.account.getEmail();
+        String lostUrl = BuildConfig.URL_SERVER + "/human/update/lost?email=" + Login.account.getEmail();
         StringRequest lostRequest = new StringRequest(Request.Method.GET, lostUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -64,7 +62,7 @@ public class GamePlay extends AppCompatActivity {
 
     private void updateWithWin() {
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String winUrl = "http://10.32.224.175:8080/human/update/win?email=" + Login.account.getEmail();
+        String winUrl = BuildConfig.URL_SERVER + "/human/update/win?email=" + Login.account.getEmail();
         StringRequest winRequest = new StringRequest(Request.Method.GET, winUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -86,7 +84,7 @@ public class GamePlay extends AppCompatActivity {
             img.setImageResource(R.drawable.water);
         } else {
             final RequestQueue queue = Volley.newRequestQueue(this);
-            String getItemsUrl = "http://10.32.224.175:8080/texture/get?name=" + Settings.selected;
+            String getItemsUrl = BuildConfig.URL_SERVER + "/texture/get?name=" + Settings.selected;
             JsonArrayRequest ItemRequest = new JsonArrayRequest(getItemsUrl, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {

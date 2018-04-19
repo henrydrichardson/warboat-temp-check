@@ -24,7 +24,7 @@ public class WinGame extends AppCompatActivity {
         final RequestQueue queue = Volley.newRequestQueue(this);
         final TextView scoreView = (TextView) findViewById(R.id.currency);
 
-        String scoreUrl = "http://10.32.224.175:8080/human/get/score?email=" + Login.account.getEmail();
+        String scoreUrl = BuildConfig.URL_SERVER + "/human/get/score?email=" + Login.account.getEmail();
         StringRequest scoreRequest = new StringRequest(Request.Method.GET, scoreUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

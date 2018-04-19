@@ -1,10 +1,7 @@
 package com.example.samanthamorris.warboat;
 
-import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -169,13 +166,6 @@ public class Grid extends AppCompatActivity {
             }
             return Misses;
 
-    }
-
-
-    public boolean isShipVisible(Player Current)
-    {
-        // TODO
-        return true;
     }
 
     // Checks if the current Grid is lost

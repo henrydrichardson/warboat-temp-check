@@ -1,9 +1,7 @@
 package com.example.samanthamorris.warboat;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.ArrayDeque;
 import java.util.Random;
-import java.util.Stack;
 
 public class AI extends Player {
 
