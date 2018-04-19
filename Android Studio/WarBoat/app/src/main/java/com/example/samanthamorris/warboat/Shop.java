@@ -155,8 +155,8 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
                                 final String price = skin.getString("price");
                                 String name = skin.getString("name");
                                 final String id = skin.getString("id");
-                                byte[] texture = Base64.decode(skin.getString("texture"), Base64.DEFAULT);
 
+                                byte[] texture = Base64.decode(skin.getString("texture"), Base64.DEFAULT);
 
                                 // Generate Title
                                 TextView txtView = new TextView(getApplicationContext());
