@@ -3,12 +3,15 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.ArrayDeque;
 import java.util.Random;
+import java.util.Stack;
 
 public class AI extends Player {
 
     public static final int GRIDLENGTH = 8;
 
     Deque<Integer> stack = new ArrayDeque<Integer>();
+
+
 
     public int Attack(Grid AiGrid, Grid human) {
 
@@ -29,8 +32,12 @@ public class AI extends Player {
         }
 
         recordShot(initial, human);
+        for(int i = 0; i < 5; i++)
+            human.setSunk(i);
+
 
         if(isHit(initial, human)) {
+
             int north = calcNorth(initial);
             int west = calcWest(initial);
             int south = calcSouth(initial);
@@ -48,37 +55,46 @@ public class AI extends Player {
             }
             if( ( !invalidShot(east) && !human.getAttackPoints().contains(east) )   ) {
                 stack.push(east);
+
             }
         }
     }
 
     public void Target(Grid human) {
          int initial = stack.pop();
-        recordShot(initial, human);
+
+         recordShot(initial, human);
+        for(int i = 0; i < 5; i++)
+            human.setSunk(i);
+
+
         if(isHit(initial, human)) {
 
-            if(didShotSink(initial, human)) {
-                while(!stack.isEmpty())
-                    stack.pop();
-            }
+                if(didShotSink(initial, human)) {
+                    while(!stack.isEmpty()) {
+                        stack.pop();
+                    }
+                    return;
+                }
 
-            int north = calcNorth(initial);
-            int west = calcWest(initial);
-            int south = calcSouth(initial);
-            int east = calcEast(initial);
+                int north = calcNorth(initial);
+                int west = calcWest(initial);
+                int south = calcSouth(initial);
+                int east = calcEast(initial);
 
-            if( ( !invalidShot(north) && !human.getAttackPoints().contains(north) )   ) {
-                stack.push(north);
-            }
-            if( ( !invalidShot(west) && !human.getAttackPoints().contains(west) )   ) {
-                stack.push(west);
-            }
-            if( ( !invalidShot(south) && !human.getAttackPoints().contains(south) )   ) {
-                stack.push(south);
-            }
-            if( ( !invalidShot(east) && !human.getAttackPoints().contains(east) )   ) {
-                stack.push(east);
-            }
+                if( ( !invalidShot(north) && !human.getAttackPoints().contains(north) )   ) {
+                    stack.push(north);
+                }
+                if( ( !invalidShot(west) && !human.getAttackPoints().contains(west) )   ) {
+                    stack.push(west);
+                }
+                if( ( !invalidShot(south) && !human.getAttackPoints().contains(south) )   ) {
+                    stack.push(south);
+                }
+                if( ( !invalidShot(east) && !human.getAttackPoints().contains(east) )   ) {
+                    stack.push(east);
+                }
+
         }
     }
 
@@ -105,9 +121,10 @@ public class AI extends Player {
         }
     }
 
+
+
     public boolean invalidShot(int attackLocation)
     {
-        boolean invalid = false;
         int row = attackLocation % GRIDLENGTH;
         if(row < 0 || row >= GRIDLENGTH)
             return true;
@@ -119,6 +136,8 @@ public class AI extends Player {
 
     public boolean didShotSink(int attackLocation, Grid Human)
     {
+
+
         if(Human.getSunkPoints().contains(attackLocation))
             return true;
         else
@@ -135,7 +154,7 @@ public class AI extends Player {
     }
 
     public int calcSouth(int attackLocation) {
-        return attackLocation - GRIDLENGTH;
+        return attackLocation + GRIDLENGTH;
     }
 
     public int calcWest(int attackLocation) {
@@ -159,7 +178,7 @@ public class AI extends Player {
                     40, 42, 44, 46,
                     49, 51, 53, 55,
                     56, 58, 60,  63};
-        int random = 0 + (int)(Math.random() * ((31 - 0) + 1));
+        int random = (int)(Math.random() * (32) );
 
         return array[random];
     }

@@ -33,7 +33,7 @@ public class Grid extends AppCompatActivity {
         // Horizontal
         if (!isRotated){
 
-            if ((anchor%8)+ Ships[ship].length >= 8)
+            if ((anchor%8)+ Ships[ship].length > 8)
             {
                 return false;
             }
