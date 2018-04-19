@@ -1,28 +1,28 @@
 Create database WarBoat;
 
 CREATE TABLE WarBoat.Player (
-	uniqueId int auto_increment, 
+	uniqueid int auto_increment, 
     gamer_tag VARCHAR(20), 
     Email VARCHAR(50) unique, 
     Wins mediumint, 
     Loss mediumint, 
     Currency int, 
-    PRIMARY KEY (uniqueId)
+    PRIMARY KEY (uniqueid)
     );
 CREATE TABLE Warboat.Item (
-	uniqueId int auto_increment,  
+	uniqueid int auto_increment,  
     Name VARCHAR(50), 
     texture_file mediumblob,
     price int,
-    PRIMARY KEY (uniqueId)
+    PRIMARY KEY (uniqueid)
     );
 CREATE TABLE WarBoat.Player_Items (
-	uniqueId int auto_increment, 
+	uniqueid int auto_increment, 
     fk_player int, 
     fk_items int,
     FOREIGN KEY (fk_player) REFERENCES Player(uniqueId),
     FOREIGN KEY (fk_items) REFERENCES Item(uniqueId),
-    PRIMARY KEY (uniqueId)
+    PRIMARY KEY (uniqueid)
     );
     
 CREATE USER 'captainhenry'@'localhost' identified by 'cecilie';

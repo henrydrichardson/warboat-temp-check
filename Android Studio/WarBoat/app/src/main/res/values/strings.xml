@@ -117,6 +117,14 @@
     <!-- Choose no -->
     <string name="no">No</string>
 
+    <!-- Boat placement -->
+    <string name="rotate">Rotate</string>
+    <string name ="place">Currently Placing</string>
+    <string name="aircraft">Aircraft Carrier (5)</string>
+    <string name="warboat">Warboat (4)</string>
+    <string name="destroyer">Destroyer (3)</string>
+    <string name="submarine">Submarine (3)</string>
+    <string name="patrol">Patrol Boat (2)</string>
 
 
     <string name="title_activity_login2">Sign in</string>

@@ -156,12 +156,13 @@ public class GamePlay extends AppCompatActivity {
                                     }
                                 }, 0);
                                 if (shipTracker == 5) {
-                                    //findViewById(R.id.placeText).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.placeText).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.ac).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.wb).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.ds).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.sb).setVisibility(View.INVISIBLE);
                                     findViewById(R.id.pb).setVisibility(View.INVISIBLE);
+                                    findViewById(R.id.RotateButton).setVisibility(View.INVISIBLE);
                                     isShipsPlaced = true;
                                     //  SystemClock.sleep(7000);
                                     handler.postDelayed(new Runnable() {
