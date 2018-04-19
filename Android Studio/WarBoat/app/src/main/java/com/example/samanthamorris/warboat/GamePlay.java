@@ -182,7 +182,7 @@ public class GamePlay extends AppCompatActivity {
                                     public void run() {
                                         redrawGrid(true,0);
                                     }
-                                }, 0);
+                                }, 1000);
                              //   SystemClock.sleep(7000);
                               /*
                                 int aiAttackLocation = Math.abs(random.nextInt()%64);
