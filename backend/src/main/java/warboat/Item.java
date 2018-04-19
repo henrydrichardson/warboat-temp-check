@@ -1,10 +1,9 @@
 package warboat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Blob;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 public class Item {
@@ -17,6 +16,13 @@ public class Item {
   private int price;
   private String name;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "purchasedItems")
+    private Set<Player> players = new HashSet<>();
 
   public Item() {
   }

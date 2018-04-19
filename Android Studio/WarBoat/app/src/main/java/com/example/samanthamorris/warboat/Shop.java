@@ -37,7 +37,8 @@ import android.widget.LinearLayout.*;
 
 
 public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.onCompleteListener {
-    final int[] pressedPrice = new int[1];
+    //Used to track ints. Position 0 represents cost. Position 1 represents item ID
+    final int[] pressed = new int[2];
 
     private void updateCurrency(int i) {
         final TextView currView = (TextView) findViewById(R.id.currency);
@@ -58,13 +59,32 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
 
         queue.add(currRequest);
     }
+
+    private void updateItems(int id) {
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        String updateItemsUrl = "http://10.32.224.175:8080/human/update/items?email=" + Login.account.getEmail() + "&newItem=" + String.valueOf(id);
+        StringRequest ItemsRequest = new StringRequest(Request.Method.GET, updateItemsUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+
+            }
+        });
+
+        queue.add(ItemsRequest);
+    }
+
     public void onComplete(String dec) {
         // get skin info
         Log.d("SELECTED", dec);
         // If user responds yes...
         TextView currView = (TextView) findViewById(R.id.currency);
         if (dec.equals("yes")) {
-            updateCurrency(Integer.parseInt(currView.getText().toString()) - pressedPrice[0]);
+            updateCurrency(Integer.parseInt(currView.getText().toString()) - pressed[0]);
+            updateItems(pressed[1]);
             Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.confirmPurchase, Snackbar.LENGTH_SHORT).show();
         }
 
@@ -134,6 +154,7 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
                                 JSONObject skin = response.getJSONObject(i);
                                 final String price = skin.getString("price");
                                 String name = skin.getString("name");
+                                final String id = skin.getString("id");
                                 byte[] texture = Base64.decode(skin.getString("texture"), Base64.DEFAULT);
 
 
@@ -165,7 +186,8 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
                                     public void onClick(View view) {
                                         // Check if user can purchase the item...
                                         if (Integer.parseInt(currView.getText().toString()) >= Integer.parseInt(price)) {
-                                            pressedPrice[0] = Integer.parseInt(price);
+                                            pressed[0] = Integer.parseInt(price);
+                                            pressed[1] = Integer.parseInt(id);
                                             // Confirm if user wants to purchase
                                             DialogFragment probe = new PurchaseDialogueFragment();
                                             probe.show(getFragmentManager(), "purchase");
