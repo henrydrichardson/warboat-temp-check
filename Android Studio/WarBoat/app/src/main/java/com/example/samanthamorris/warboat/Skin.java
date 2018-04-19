@@ -5,10 +5,10 @@ public class Skin {
     private int skinNum;
     private String name;
 
-    public Skin (int price, int skinNum, String name) {
+    public Skin (int price, int skinNum) {
         this.price = price;
         this.skinNum = skinNum;
-        this.name = name;
+        //this.name = name;
     }
 
     public int getPrice() {
