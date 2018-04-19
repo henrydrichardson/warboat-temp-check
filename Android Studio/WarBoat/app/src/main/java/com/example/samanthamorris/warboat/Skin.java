@@ -1,11 +1,14 @@
 package com.example.samanthamorris.warboat;
 
 public class Skin {
-    int price;
-    int skinNum;
-    public Skin (int price, int skinNum) {
+    private int price;
+    private int skinNum;
+    private String name;
+
+    public Skin (int price, int skinNum, String name) {
         this.price = price;
         this.skinNum = skinNum;
+        this.name = name;
     }
 
     public int getPrice() {
@@ -15,4 +18,6 @@ public class Skin {
     public int getSkinNum() {
         return this.skinNum;
     }
+
+    public String getName() { return name; }
 }
