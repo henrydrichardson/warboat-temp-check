@@ -32,7 +32,7 @@ public class Settings extends AppCompatActivity {
 
     private void getItems() {
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String getItemsUrl = "http://10.32.224.175:8080/human/get/items?email=" + Login.account.getEmail();
+        String getItemsUrl = BuildConfig.URL_SERVER + "/human/get/items?email=" + Login.account.getEmail();
         JsonArrayRequest ItemsRequest = new JsonArrayRequest( getItemsUrl, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

@@ -3,7 +3,6 @@ package com.example.samanthamorris.warboat;
 public class Human extends Player {
     protected int id;
     public String name;
-    private int score;
     public Grid PlayerGrid;
 
     protected Human(){
@@ -42,15 +41,6 @@ public class Human extends Player {
         return 0;
     }
 
-    public void updateWins()
-    {
-
-    }
-
-    public void updateLosses()
-    {
-
-    }
 
     public int getScore()
     {
@@ -59,18 +49,8 @@ public class Human extends Player {
         //return 0;
     }
 
-    public int updateScore()
-    {
-        return 0;
-    }
-
     public int getCurrency()
     {
         return 0;
-    }
-
-    public void updateCurrency()
-    {
-
     }
 }

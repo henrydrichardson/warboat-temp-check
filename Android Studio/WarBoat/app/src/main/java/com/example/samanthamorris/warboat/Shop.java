@@ -44,7 +44,7 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
         final TextView currView = (TextView) findViewById(R.id.currency);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String updateCurrUrl = "http://10.32.224.175:8080/human/update/currency?email=" + Login.account.getEmail() + "&latestValue=" + String.valueOf(i);
+        String updateCurrUrl = BuildConfig.URL_SERVER + "/human/update/currency?email=" + Login.account.getEmail() + "&latestValue=" + String.valueOf(i);
         StringRequest currRequest = new StringRequest(Request.Method.GET, updateCurrUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -62,7 +62,7 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
 
     private void updateItems(int id) {
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String updateItemsUrl = "http://10.32.224.175:8080/human/update/items?email=" + Login.account.getEmail() + "&newItem=" + String.valueOf(id);
+        String updateItemsUrl = BuildConfig.URL_SERVER + "/human/update/items?email=" + Login.account.getEmail() + "&newItem=" + String.valueOf(id);
         StringRequest ItemsRequest = new StringRequest(Request.Method.GET, updateItemsUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -99,8 +99,8 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
     private void loadStore() {
         // Request Queue Manager
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.32.224.175:8080/items";
-        String currUrl = "http://10.32.224.175:8080/human/get/currency?email=" + Login.account.getEmail();
+        String url = BuildConfig.URL_SERVER + "/items";
+        String currUrl = BuildConfig.URL_SERVER + "/human/get/currency?email=" + Login.account.getEmail();
 
         //Load Currency
         final TextView currView = (TextView) findViewById(R.id.currency);

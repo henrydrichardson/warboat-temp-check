@@ -84,7 +84,7 @@ public class StartupScreen extends Activity {
         final RequestQueue queue = Volley.newRequestQueue(this);
         final TextView scoreView = (TextView) findViewById(R.id.displayscore);
 
-        String scoreUrl = "http://10.32.224.175:8080/human/get/score?email=" + Login.account.getEmail();
+        String scoreUrl = BuildConfig.URL_SERVER + "/human/get/score?email=" + Login.account.getEmail();
         StringRequest scoreRequest = new StringRequest(Request.Method.GET, scoreUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -103,7 +103,7 @@ public class StartupScreen extends Activity {
 
         final TextView currView = (TextView) findViewById(R.id.displaycurrency);
 
-        String currUrl = "http://10.32.224.175:8080/human/get/currency?email=" + Login.account.getEmail();
+        String currUrl = BuildConfig.URL_SERVER + "/human/get/currency?email=" + Login.account.getEmail();
         StringRequest currRequest = new StringRequest(Request.Method.GET, currUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
