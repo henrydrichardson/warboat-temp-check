@@ -1,10 +1,13 @@
 package com.example.samanthamorris.warboat;
 
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.auth.api.signin.*;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.common.api.ApiException;
+import com.android.volley.*;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
@@ -25,7 +28,7 @@ public class Login extends AppCompatActivity implements
     private static final int RC = 49404;
 
     // The core Google Play Services client.
-    private GoogleApiClient mGoogleApiClient;
+    private GoogleSignInClient mGoogleSignInClient;
 
     // A progress dialog to display when the user is connecting in
     // case there is a delay in any of the dialogs being ready.
@@ -36,22 +39,13 @@ public class Login extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login3);
 
-        String serverClientId = getString(R.string.server_client_id);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(new Scope(Scopes.PLUS_LOGIN))
-                .requestServerAuthCode(serverClientId)
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-
-        mConnectionProgressDialog = new ProgressDialog(this);
-        mConnectionProgressDialog.setMessage("Signing in...");
 
 
     }
@@ -60,22 +54,9 @@ public class Login extends AppCompatActivity implements
     public void onStart() {
         super.onStart();
 
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Checking sign in state...");
-            progressDialog.show();
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    progressDialog.dismiss();
-                    handleSignInResult(googleSignInResult);
-
-                }
-            });
-        }
+        //Check if already logged in
+        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);
     }
 
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -88,46 +69,80 @@ public class Login extends AppCompatActivity implements
         super.onActivityResult(requestCode, responseCode, intent);
 
         if (requestCode == RC) {
-            mConnectionProgressDialog.dismiss();
-
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
-            handleSignInResult(result);
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(intent);
+            handleSignInResult(task);
         }
     }
 
     public void onClick(View view) {
-                mConnectionProgressDialog.show();
 
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, RC);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        mGoogleApiClient.connect();
+        signIn();
 
     }
 
-    private void handleSignInResult(GoogleSignInResult result ) {
-        if (result.isSuccess()) {
-            Log.d("SIGNON RESULT","SUCCESSFUL SIGNON");
-            GoogleSignInAccount acct = result.getSignInAccount();
+    public void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC);
+    }
 
-            // TODO: put info into database
-            String email = acct.getEmail();
+    private void checkUser(final GoogleSignInAccount account) {
+        String url = "http://10.32.224.175:8080/human/check?email=" + account.getEmail();
+        final RequestQueue queue = Volley.newRequestQueue(this);
 
-            startActivity(new Intent(this, StartupScreen.class));
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (response == "True") {
+                    Log.i("Login", "User Exists");
+                    updateUI(account);
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+
+                Log.i("Login", "Registering User");
+
+                String registerUrl = "http://10.32.224.175:8080/human/add?email=" + account.getEmail() + "&gamerTag=" + account.getDisplayName();
+                StringRequest registerRequest = new StringRequest(Request.Method.GET, registerUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i("Login", "Successful Register");
+                        updateUI(account);
+                    }
+
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        Log.e("Login", "Error:" + e);
+                    }
+                });
+                queue.add(registerRequest);
+            }
         }
-        else {
-            Log.d("SIGNON RESULT","UNSUCCESSFUL SIGNON");
-            Log.d("wtf", "handleSignInResult:" + result.getStatus().toString());
-        }
+        );
 
+        queue.add(stringRequest);
+
+    }
+
+    private void updateUI(GoogleSignInAccount account) {
+
+
+        Intent myIntent = new Intent(this,
+                StartupScreen.class);
+        startActivity(myIntent);
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> result) {
+        try {
+            GoogleSignInAccount account = result.getResult(ApiException.class);
+            checkUser(account);
+        } catch (ApiException e) {
+            Log.w("Login", "signInResult: failed code=" + e.getStatusCode());
+        }
     }
 }

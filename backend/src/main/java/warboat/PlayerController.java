@@ -14,6 +14,16 @@ public class PlayerController {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @RequestMapping(path="/human/check", method = RequestMethod.GET)
+   public @ResponseBody String checkPlayer(@RequestParam String email) {
+       Player n = playerRepository.findByEmail(email).get(0);
+       if (n!=null){
+           return "True";
+       } else {
+           return "False";
+       }
+   }
+
 
     @RequestMapping(path="/human/add", method = RequestMethod.GET)
     public @ResponseBody String  addPlayer(@RequestParam String email, @RequestParam String gamerTag) {
