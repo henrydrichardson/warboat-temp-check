@@ -2,39 +2,70 @@ package com.example.samanthamorris.warboat;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.support.design.widget.Snackbar;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.widget.LinearLayout;
+
+import android.widget.LinearLayout.*;
+
 
 public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.onCompleteListener {
-    // TODO: Replace cur with actual currency value from database
-    int cur = 888;
+    final int[] pressedPrice = new int[1];
 
-    // Skin prices
-    int skin1Price = 15;
-    int skin2Price = 25;
+    private void updateCurrency(int i) {
+        final TextView currView = (TextView) findViewById(R.id.currency);
 
-    // Initialize this skin when we buy it
-    Skin s;
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        String updateCurrUrl = "http://10.32.224.175:8080/human/update/currency?email=" + Login.account.getEmail() + "&latestValue=" + String.valueOf(i);
+        StringRequest currRequest = new StringRequest(Request.Method.GET, updateCurrUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                currView.setText(String.valueOf(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
 
-    // User has selected yes or no to purchase
+            }
+        });
+
+        queue.add(currRequest);
+    }
     public void onComplete(String dec) {
         // get skin info
-        Log.d("SELECTED",dec);
+        Log.d("SELECTED", dec);
         // If user responds yes...
+        TextView currView = (TextView) findViewById(R.id.currency);
         if (dec.equals("yes")) {
-            // Decrease currency and confirm purchase.
-            cur -= s.getPrice();
-            String strCur = String.valueOf(cur);
-            TextView curView = (TextView) findViewById(R.id.currency);
-            curView.setText(strCur);
+            updateCurrency(Integer.parseInt(currView.getText().toString()) - pressedPrice[0]);
             Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.confirmPurchase, Snackbar.LENGTH_SHORT).show();
-            // TODO: add skin option to list in settings activity
         }
 
         // User decided against purchase
@@ -45,58 +76,132 @@ public class Shop extends AppCompatActivity implements PurchaseDialogueFragment.
     }
 
 
+    private void loadStore() {
+        // Request Queue Manager
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://10.32.224.175:8080/items";
+        String currUrl = "http://10.32.224.175:8080/human/get/currency?email=" + Login.account.getEmail();
+
+        //Load Currency
+        final TextView currView = (TextView) findViewById(R.id.currency);
+
+        StringRequest currRequest = new StringRequest(Request.Method.GET, currUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                currView.setText(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+
+            }
+        }
+        );
+
+        queue.add(currRequest);
+        //Common Layout Params
+        LinearLayout layout = (LinearLayout) findViewById(R.id.main_layout);
+
+
+        // Name TextView Params
+        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
+        params.weight = 1.0f;
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+
+        // Img Params
+        final LinearLayout.LayoutParams imgParams = new LinearLayout.LayoutParams(400,500);
+        imgParams.gravity = Gravity.CENTER_HORIZONTAL;
+
+        //Purchase Button Params
+        final LinearLayout.LayoutParams purchaseParams = new LinearLayout.LayoutParams(500,150);
+        purchaseParams.gravity = Gravity.CENTER_HORIZONTAL;
+
+
+        // Request all items from Store
+
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(
+                url,
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        try {
+                            LinearLayout layout = (LinearLayout) findViewById(R.id.main_layout);
+
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject skin = response.getJSONObject(i);
+                                final String price = skin.getString("price");
+                                String name = skin.getString("name");
+                                byte[] texture = Base64.decode(skin.getString("texture"), Base64.DEFAULT);
+
+
+                                // Generate Title
+                                TextView txtView = new TextView(getApplicationContext());
+                                txtView.setText(name);
+                                txtView.setTypeface(Typeface.SANS_SERIF);
+                                txtView.setTextSize(30);
+                                txtView.setLayoutParams(params);
+                                layout.addView(txtView);
+
+
+                                //Create Image Button
+                                ImageButton imgBtn = new ImageButton(getApplicationContext());
+                                Drawable image = new BitmapDrawable(BitmapFactory.decodeByteArray(texture, 0, texture.length));
+                                imgBtn.setBackground(image);
+                                imgBtn.setLayoutParams(imgParams);
+                                layout.addView(imgBtn);
+
+
+                                //Create purchase button
+                                Button btn = new Button(getApplicationContext());
+
+
+                                btn.setText("Buy for " + price + " coins");
+                                btn.setLayoutParams(purchaseParams);
+                                btn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        // Check if user can purchase the item...
+                                        if (Integer.parseInt(currView.getText().toString()) >= Integer.parseInt(price)) {
+                                            pressedPrice[0] = Integer.parseInt(price);
+                                            // Confirm if user wants to purchase
+                                            DialogFragment probe = new PurchaseDialogueFragment();
+                                            probe.show(getFragmentManager(), "purchase");
+                                        } else {
+                                            // User cannot purchase - does not have enough currency
+                                            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.denyPurchase, Snackbar.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                                layout.addView(btn);
+
+
+
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Shop","Json Error");
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                Log.e("Shop", "henry fucked up");
+            }
+        });
+
+        queue.add(arrayRequest);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-
-        String strCur = String.valueOf(cur);
-        TextView curView = (TextView) findViewById(R.id.currency);
-        curView.setText(strCur);
-
-        // Buy screen 1
-        Button buy1 = (Button) findViewById(R.id.buySkin_1);
-        buy1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Check if user can purchase the item...
-                if(cur >= skin1Price) {
-                    // Create skin 1
-                    s = new Skin(skin1Price, 1);
-                    // Confirm if user wants to purchase
-                    DialogFragment probe = new PurchaseDialogueFragment();
-                    probe.show(getFragmentManager(), "purchase");
-                }
-
-                else {
-                    // User cannot purchase - does not have enough currency
-                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.denyPurchase, Snackbar.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        // Buy screen 2
-        Button buy2 = (Button) findViewById(R.id.buySkin_2);
-        buy2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Check if user can purchase the item...
-                if(cur >= skin2Price) {
-                    // Create skin 2
-                    s = new Skin(skin2Price, 2);
-                    // Confirm if user wants to purchase
-                    DialogFragment probe = new PurchaseDialogueFragment();
-                    probe.show(getFragmentManager(), "purchase");
-                }
-
-                else {
-                    // User cannot purchase - does not have enough currency
-                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.denyPurchase, Snackbar.LENGTH_SHORT).show();
-                }
-            }
-        });
-
+        loadStore();
     }
 
 }
