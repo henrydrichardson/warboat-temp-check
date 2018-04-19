@@ -23,9 +23,9 @@ public class AI extends Player {
     }
 
     public void Hunt(Grid human) {
-        int initial = generateEvenNumber(0, (GRIDLENGTH * GRIDLENGTH) - 1);
+        int initial = generateEvenParity();
         while(human.getAttackPoints().contains(initial)) {
-            initial = generateEvenNumber(0, (GRIDLENGTH * GRIDLENGTH) - 1);
+            initial = generateEvenParity();
         }
 
         recordShot(initial, human);
@@ -149,5 +149,21 @@ public class AI extends Player {
         int randomNum = ((rand.nextInt((max - min)) + min) + 1) / 2; // Divide both by 2 to ensure the range
         return randomNum * 2; // multiply by 2 to make the number even
     }
+
+    public int generateEvenParity() {
+       int[] array = {1, 3, 5, 7,
+                        8, 10, 12, 14,
+                    17, 19, 21, 23,
+                    24, 26, 28, 30,
+                    33, 35, 37, 39,
+                    40, 42, 44, 46,
+                    49, 51, 53, 55,
+                    56, 58, 60,  63};
+        int random = 0 + (int)(Math.random() * ((31 - 0) + 1));
+
+        return array[random];
+    }
+
+
 
 }
