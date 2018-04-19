@@ -60,7 +60,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/aldrich"
+                android:fontFamily="@font/heebo_thin"
                 android:text="PubSub Skin"
                 android:textAlignment="center"
                 android:textSize="24sp" />
@@ -84,12 +84,12 @@
                 android:id="@+id/skinName_2"
                 android:layout_width="148dp"
                 android:layout_height="30dp"
-                android:fontFamily="@font/aldrich"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/heebo_thin"
                 android:text="Kuzco Skin"
                 android:textAlignment="center"
-                android:textSize="24sp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"/>
+                android:textSize="24sp" />
             <ImageView
                 android:id="@+id/skinPNG_2"
                 android:layout_width="172dp"
@@ -107,18 +107,19 @@
                 android:id="@+id/skinName_3"
                 android:layout_width="148dp"
                 android:layout_height="30dp"
-                android:fontFamily="@font/aldrich"
-                android:text="Kuzco Skin"
-                android:textAlignment="center"
-                android:textSize="24sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/heebo_thin"
+                android:text="Lockheed Martin Skin"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
             <ImageView
                 android:id="@+id/skinPNG_3"
                 android:layout_width="172dp"
                 android:layout_height="157dp"
-                app:srcCompat="@drawable/kuzco"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/lockheed" />
             <Button
                 android:id="@+id/buySkin_3"
                 android:layout_width="177dp"
