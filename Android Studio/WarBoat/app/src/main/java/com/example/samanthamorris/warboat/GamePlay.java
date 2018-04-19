@@ -171,7 +171,7 @@ public class GamePlay extends AppCompatActivity {
                                         public void run() {
                                             redrawGrid(false,1);
                                         }
-                                    }, 1000);
+                                    }, 300);
 
                                 }
                             }
@@ -184,7 +184,7 @@ public class GamePlay extends AppCompatActivity {
                                     public void run() {
                                         redrawGrid(true,0);
                                     }
-                                }, 1000);
+                                }, 300);
                              //   SystemClock.sleep(7000);
                               /*
                                 int aiAttackLocation = Math.abs(random.nextInt()%64);
@@ -215,12 +215,13 @@ public class GamePlay extends AppCompatActivity {
 
                                 turn++;
 
+
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
                                         redrawGrid(false,1);
                                     }
-                                }, 10000);
+                                }, 2000); //WINDOW TIMING
                             }
                         }
 
