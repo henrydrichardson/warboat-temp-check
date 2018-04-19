@@ -28,7 +28,7 @@ public class Settings extends AppCompatActivity {
 
     private Spinner skinSpinner;
     private ArrayList<String> spinnerArray = new ArrayList<>();
-    public String selected = new String();
+    public static String selected = new String("Basic");
 
     private void getItems() {
         final RequestQueue queue = Volley.newRequestQueue(this);

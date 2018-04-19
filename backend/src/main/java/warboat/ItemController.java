@@ -20,4 +20,9 @@ public class ItemController {
         return itemRepository.findAll();
     }
 
+    @RequestMapping(path = "/texture/get", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Item> getTexture(@RequestParam String name) {
+        return itemRepository.findByName(name);
+    }
+
 }

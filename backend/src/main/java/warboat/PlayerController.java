@@ -42,9 +42,11 @@ public class PlayerController {
     @RequestMapping(path="/human/get/score", method = RequestMethod.GET)
     public @ResponseBody String  getScore(@RequestParam String email) {
         Player n = playerRepository.findByEmail(email).get(0);
-	if(n.getWins() == 0 & n.getLosses() == 0) {
+	if((n.getWins() == 0 & n.getLosses() == 0) || (n.getWins() == 0 & n.getLosses() > 0)) {
             return "0";
-        } else {
+        } else if (n.getWins() > 0 & n.getLosses() == 0) {
+            return "100";
+        }else {
             return String.valueOf(n.getScore());
         }
     }
@@ -65,6 +67,21 @@ public class PlayerController {
 	n.setCurrency(Integer.parseInt(latestValue));
 	playerRepository.save(n);
 	return String.valueOf(n.getCurrency());
+        }
+    @RequestMapping(path="/human/update/loss", method = RequestMethod.GET)
+    public @ResponseBody String  updateLosses(@RequestParam String email) {
+        Player n = playerRepository.findByEmail(email).get(0);
+	n.setLosses(n.getLosses()+1);
+	playerRepository.save(n);
+	return "You lose sucker";
+        }
+    @RequestMapping(path="/human/update/win", method = RequestMethod.GET)
+    public @ResponseBody String  updateWins(@RequestParam String email) {
+        Player n = playerRepository.findByEmail(email).get(0);
+	n.setWins(n.getWins()+1);
+	n.setCurrency(n.getCurrency()+2);
+	playerRepository.save(n);
+	return "You win some monna";
         }
     @RequestMapping(path="/human/update/items", method = RequestMethod.GET)
     public @ResponseBody String  updateItems(@RequestParam String email, @RequestParam String newItem) {
