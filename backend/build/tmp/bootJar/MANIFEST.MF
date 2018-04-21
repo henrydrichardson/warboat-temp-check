@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Start-Class: warboat.Application
 Main-Class: org.springframework.boot.loader.JarLauncher
 
+=======
+Manifest-Version: 1.0
+Start-Class: warboat.Application
+Main-Class: org.springframework.boot.loader.JarLauncher
+
+>>>>>>> d1d308004cc832de5a11abacee9467d2cf27b8fc
